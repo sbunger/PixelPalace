@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Pixel Palace</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="description" content="" />
+        <link rel="icon" href="/images/favicon.ico">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jacquard+24&family=Jersey+10&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="/style.css">
+
+        <style>
+
+            .header {
+                background-color: rgba(0, 0, 0, .5);
+            }
+
+            .art {
+                position: absolute;
+            }
+
+            .picture {
+                position: absolute;
+                z-index: 1;
+            }
+
+            .art img {
+                width: 100%;
+                display: block;
+            }
+
+            .art .frame {
+                position: relative;
+                z-index: 2;
+            }
+
+            .art1 {
+                top: 830px;
+
+                width: 13%;
+                left: 30%;
+            }
+
+            .art2 {
+                top: 830px;
+
+                width: 25%;
+                right: 30%;
+            }
+
+            .art3 {
+                top: 1120px;
+                width: 19%;
+                right: 30%;
+            }
+
+            .art4 {
+                top: 1165px;
+                width: 19%;
+                left: 30%;
+            }
+
+            .art5 {
+                top: 1560px;
+                width: 19%;
+                left: 30%;
+            }
+
+            .art6 {
+                top: 1510px;
+                width: 19%;
+                right: 30%;
+            }
+
+            .container {
+                margin: 50px auto;
+            }
+
+            .container img {
+                width: 100%;
+            }
+
+            .copywrite {
+                margin-top: 1100px;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .art {
+                    position: relative;
+                    width: 80%;
+                    margin: 50px auto;
+                    top: auto;
+                    left: auto;
+                    right: auto;
+                }
+                
+                .copywrite {
+                    margin: 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="team outline">
+            <a href="/index.html">
+                <img src="/images/home.png" width="200px">
+            </a>
+        </div>
+
+
+        <div class="container outline header">
+            <img src="/images/gallery.png">
+        </div>
+
+        <h2>Art art art art</h2>
+
+        <div class="container outline">
+            <h1>Art Gallery</h1>
+            <p>A collection of works of art created by my inspirations across the internet. <span style="color: #3159b0">Click</span> the frames to visit these websites.</p>
+        </div>
+
+        <div class="art art1">
+            <a href="https://coffeereceiptstories.com/">
+                <img class="picture" src="/images/gallery/art1.png">
+                <img class="frame" src="/images/frames/frame1.png">
+            </a>
+        </div>
+
+        <div class="art art2">
+            <a href="https://vintagewestwoodland.wordpress.com/">
+                <img class="picture" src="/images/gallery/art2.png">
+                <img class="frame" src="/images/frames/frame2.png">
+            </a>
+        </div>
+
+        <div class="art art3">
+            <a href="https://yumiincolor.com/">
+                <img class="picture" src="/images/gallery/art3.png">
+                <img class="frame" src="/images/frames/frame3.png">
+            </a>
+        </div>
+
+        <div class="art art4">
+            <a href="https://www.simonandschuster.com/books/The-Serviceberry/Robin-Wall-Kimmerer/9781668072240">
+                <img class="picture" src="/images/gallery/art4.png">
+                <img class="frame" src="/images/frames/frame4.png">
+            </a>
+        </div>
+
+        <div class="art art5">
+            <a href="https://silasunger.me">
+                <img class="picture" src="/images/gallery/art5.png">
+                <img class="frame" src="/images/frames/frame5.png">
+            </a>
+        </div>
+
+        <div class="art art6 self">
+            <a href="https://silasunger.me">
+                <img class="picture" src="/images/gallery/art6.png">
+                <img class="frame" src="/images/frames/frame6.png">
+            </a>
+        </div>
+
+        <p class="copywrite">© <a href="https://www.youtube.com/watch?v=9jK-NcRmVcw"><span style="color: #E3D8D8">1999</span></a> Silas Unger</p>
+    </body>
+</html>
