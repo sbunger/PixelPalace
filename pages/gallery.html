@@ -36,6 +36,8 @@
             .art .frame {
                 position: relative;
                 z-index: 2;
+
+                transition: all .05s;
             }
 
             .art1 {
@@ -76,6 +78,10 @@
                 right: 30%;
             }
 
+            .frame:hover {
+                transform: scale(1.05);   
+            }
+
             .container {
                 margin: 50px auto;
             }
@@ -101,6 +107,10 @@
                 .copywrite {
                     margin: 0;
                 }
+
+                .frame:hover {
+                    transform: scale(1);
+                }
             }
         </style>
     </head>
@@ -116,7 +126,7 @@
             <img src="/images/gallery.png">
         </div>
 
-        <h2>Art art art art</h2>
+        <h2 class="blink">Art art art art</h2>
 
         <div class="container outline">
             <h1>Art Gallery</h1>

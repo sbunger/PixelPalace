@@ -58,9 +58,16 @@ a {
     border-right: 0;
 }
 
+.blink {
+    animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+    30% { opacity: 0; }
+}
+
 @media only screen and (max-width: 600px) {
   .container {
     width: 80%;
   }
 }
-
