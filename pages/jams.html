@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Pixel Palace</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="description" content="" />
+        <link rel="icon" href="/images/favicon.ico">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jacquard+24&family=Jersey+10&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="/style.css">
+
+        <style>
+
+            .container {
+                margin: 20px auto;
+            }
+
+            .header img {
+                width: 100%;
+            }
+
+            .header {
+                background-color: rgba(0, 0, 0, .5);
+                margin: 50px auto;
+            }
+        
+            .list {
+                display: inline-block; 
+            }
+            
+            ul  {
+                list-style-type: none;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .album {
+                position: absolute;
+                width: 300px
+            }
+
+            .album .frame {
+                position: absolute;
+
+                width: 100%;
+                display: block;
+
+                position: relative;
+                z-index: 2;
+
+                transition: all .05s;
+            }
+
+            .album .frame:hover {
+                transform: scale(1.05);
+            }
+
+            .album .picture {
+                position: absolute;
+                transform: translate(26%, 26%);
+
+                width: 67%;
+                display: block;
+            }
+
+            .album1 {
+                left: 5%;
+                top: 600px;
+            }
+
+            .album2 {
+                right: 5%;
+                top: 800px;
+            }
+
+            .album3 {
+                left: 5%;
+                top: 1000px;
+            }
+
+            .album4 {
+                right: 5%;
+                top: 1200px;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .album {
+                    position: relative;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                }
+
+                .album:hover {
+                    transform: scale(1);
+                }
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="team outline">
+            <a href="/index.html">
+                <img src="/images/home.png" width="200px">
+            </a>
+        </div>
+
+
+        <div class="container outline header">
+            <img src="/images/jams.png">
+        </div>
+
+        <h2 class="blink">You gotta listen to this!</h2>
+
+        <div class="container outline list">
+            <ul>
+                <li>
+                    <h2>Lucy Dacus</h2>
+                    <p>I am a huge Lucy Dacus fan! Last summer, I saw her in concert on a farm in Washinton, and it was almost definitely the best concert I have ever been to. <a href="https://open.spotify.com/album/7lQ9R31OcTvMn2MojAuKVE">No Burden</a> is my definitive favorite album (despite the fact that it may be one of the saddest albums ever).</p>
+
+                    <div class="album album1">
+                        <a href="https://open.spotify.com/album/7lQ9R31OcTvMn2MojAuKVE">
+                            <img class="picture" src="/images/albums/lucy-dacus.png">
+                            <img class="frame" src="/images/frames/frame6.png">
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <h2 >Big Thief</h2>
+                    <p>Big Thief is one of my all time favorite artists. They seem to blend funny bops (like <a href="https://open.spotify.com/track/3Q6VfeIZ1bTjWiNe2Or4LQ">Spud Infinity</a>) seamlessly with introspective songs like <a href="https://open.spotify.com/track/3HFBqhotJeEKHJzMEW31jZ">Change</a>, both in the same album. Their new album, Double Infinity was a quick favorite, and there are zero skips throughout their entire discography.</p>
+
+                    <div class="album album2">
+                        <a href="https://open.spotify.com/album/1yEo1ZJE5ZgIF7LYrDTbMK">
+                            <img class="picture" src="/images/albums/big-thief.png">
+                            <img class="frame" src="/images/frames/frame6.png">
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <h2 >Aliceband</h2>
+                    <p>Aliceband is a super interesting band. The lead singer, Alice Walker (no, not that Alice Walker), mixes jazzy rythms and instruments with a more pop-focused overall sound. Their <a href="https://open.spotify.com/album/1ikXR3naSvqHn5aej1Lxtw">self titled album</a> is the most new-listener friendly, but there are some deep cuts I like such as <a href="https://open.spotify.com/track/7qiwZ5FVGHEalQjYxcVlf3">red river</a>.</p>
+
+                    <div class="album album3">
+                        <a href="https://open.spotify.com/album/1ikXR3naSvqHn5aej1Lxtw">
+                            <img class="picture" src="/images/albums/aliceband.png">
+                            <img class="frame" src="/images/frames/frame6.png">
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <h2 >Fleet Foxes</h2>
+                    <p>Fleet Foxes is my background music. I love to put on an album while reading or finishing my home work. There are some "bangers," like <a href="https://open.spotify.com/track/2s7pyee9w04uQy3cNKzey9">Mykonos</a>, but they are mainly a very chill band.</p>
+
+                    <div class="album album4">
+                        <a href="https://open.spotify.com/album/3vz6xBtlgVdLTRgK1CiPcF">
+                            <img class="picture" src="/images/albums/fleet-foxes.png">
+                            <img class="frame" src="/images/frames/frame6.png">
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <p class="copywrite">© <a href="https://www.youtube.com/watch?v=9jK-NcRmVcw"><span style="color: #E3D8D8">1999</span></a> Silas Unger</p>
+    </body>
+</html>
