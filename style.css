@@ -1,6 +1,7 @@
 body {
     font-family: "Jersey 10";
     background-image: url(images/BG.png);
+    
     background-repeat: repeat;
     background-size: 200px;
     background-attachment: fixed;
@@ -13,6 +14,10 @@ body {
 
     font-size: 25px;
     color: #E3D8D8;
+}
+
+img {
+     image-rendering: pixelated;
 }
 
 h1 {
@@ -51,5 +56,11 @@ a {
 
     border-left: 0;
     border-right: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 80%;
+  }
 }
 

@@ -18,17 +18,27 @@
             .header {
                 background-color: rgba(0, 0, 0, .5);
                 padding: 20px;
+                cursor: pointer;
+            }
+            
+            .hackclub {
+                position: absolute;
+                left: 100px;
+                top: 20px;
             }
 
             .planets {
                 width: 200px;
                 position: absolute;
+
+                transition: all .05s;
             }
 
             .lightning {
                 width: 150px;
                 position: absolute;
                 opacity: 0.9;
+                pointer-events: none;
             }
 
             .lightning1 {
@@ -37,6 +47,16 @@
 
             .lightning2 {
                 top: 150px; right: 25%;
+            }
+
+            .explosion {
+                width: 300px;
+                position: absolute;
+                left: 50%;
+                top: 0;
+                transform: translateX(-50%);
+
+                pointer-events: none;
             }
 
             .planets:hover {
@@ -76,11 +96,44 @@
             }
 
             .egg {
-                transition: all .1s;
+                transition: all 0.1s;
+                cursor: pointer;
             }
 
             .egg:active {
                 color: #449380;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .footer {
+                    width: 80%;
+                }
+
+                .header {
+                    width: 80%;
+                }
+
+                .planets {
+                    position: relative;
+                    left: auto;
+                    right: auto;
+                    top: auto;
+                    
+                    margin: 20px;
+                    margin-top: 50px;
+                }
+
+                .lightning1 {
+                    left: 0;
+                }
+
+                .lightning2 {
+                    right: 0;
+                }
+
+                .hackclub {
+                    left: 10px;
+                }
             }
         </style>
     </head>
@@ -88,10 +141,10 @@
         <img class="lightning lightning1" src="/images/effects/lightning1.gif">
         <img class="lightning lightning2" src="/images/effects/lightning2.gif">
 
-        <a href="/pages/page1.html"><img class="planets left-planet-1" src="/images/planets/neptune.png"></a>
-        <a href="/pages/page2.html"><img class="planets left-planet-2" src="/images/planets/saturn.png"></a>
-        <a href="/pages/page3.html"><img class="planets right-planet-1" src="/images/planets/earth.png"></a>
-        <a href="/pages/page4.html"><img class="planets right-planet-2" src="/images/planets/jupiter.gif"></a>
+
+        <a class="hackclub" href="https://hackclub.com/" target="_blank">
+            <img src="/images/hackclub.png" height="60px">
+        </a>
 
         <div class="outline team">
             <a href="https://olympics.hackclub.com/" target="_blank">
@@ -100,8 +153,11 @@
         </div>
 
         <br>
-        <img class="outline header" src="/images/title.png" width="40%">
+
+        <img class="outline header" id="logo" src="/images/title.png" width="40%">
+
         <h2>Open Sesame...</h2>
+
         <div class="container outline">
             <h1>Hello, world!</h1>
             <p class="egg">Click the planets to travel through across my site! Who knows what you may find... <span style="color: #3159b0">PS: Click everthing ;-)</span></p>
@@ -109,7 +165,14 @@
             <h2>About This Site</h2>
             <p>This project is a time capsule back to the early days of the internet, when the web was a place to express yourself. It is simply a collection of what I find cool on and off the internet.</p>
         </div>
+
+        <a href="/pages/page1.html"><img class="planets left-planet-1" src="/images/planets/neptune.png"></a>
+        <a href="/pages/page2.html"><img class="planets left-planet-2" src="/images/planets/saturn.png"></a>
+        <a href="/pages/page3.html"><img class="planets right-planet-1" src="/images/planets/earth.png"></a>
+        <a href="/pages/page4.html"><img class="planets right-planet-2" src="/images/planets/jupiter.gif"></a>
+
         <h2><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">welcome home</a></h2>
+
         <div class="footer outline">
             <a><img src="/images/banners/256_monitor_button.gif">
             <a href="https://en.wikipedia.org/wiki/ACAB"><img src="/images/banners/acab.gif"></a>
@@ -120,5 +183,21 @@
         </div>
 
         <p>© <a href="https://www.youtube.com/watch?v=9jK-NcRmVcw"><span style="color: #E3D8D8">1999</span></a> Silas Unger</p>
+
+        <script>
+            const logo = document.getElementById("logo");
+
+            logo.addEventListener("click", () => {
+                const gif = document.createElement("img");
+                gif.src = "/images/effects/explosion.gif";
+                gif.className = "explosion";
+                
+                document.body.appendChild(gif);
+                
+                setTimeout(() => {
+                    gif.remove();
+                }, 1500); 
+            });
+        </script>
     </body>
 </html>
