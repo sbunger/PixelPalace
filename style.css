@@ -58,6 +58,8 @@ a {
     border-right: 0;
 }
 
+.team1 img {margin: 11px}
+
 .blink {
     animation: blink 1s step-start infinite;
 }
