@@ -27,11 +27,16 @@
                 top: 20px;
             }
 
-            .planets {
+            .planet-wrap {
                 width: 200px;
                 position: absolute;
+                display: flex;
 
                 transition: all .05s;
+            }
+
+            .planets {
+                width: 100%;
             }
 
             .lightning {
@@ -59,19 +64,34 @@
                 pointer-events: none;
             }
 
-            .planets:hover {
-                transform: scale(1.15)
+            
+            .planet-wrap {
+                position: absolute;
+                transition: transform 0.075s ease;
+            }
+
+            .planet-wrap:hover {
+                transform: scale(1.11);
             }
 
             .left-planet-1 {
                 top: 300px; left: 20%;
             }
+
             .left-planet-2 {
                 top: 700px; left: 20%;
             }
+            .left-planet-2 img {
+                animation: spin 45s linear infinite;
+            }
+
             .right-planet-1 {
                 top: 200px; right: 20%;
             }
+            .right-planet-1 img {
+                animation: spinReverse 60s linear infinite;
+            }
+
             .right-planet-2 {
                 top: 600px; right: 20%;
             }
@@ -113,17 +133,21 @@
                     width: 80%;
                 }
 
-                .planets {
-                    position: relative;
-                    left: auto;
-                    right: auto;
-                    top: auto;
-                    
-                    margin: 20px;
-                    margin-top: 50px;
-
-                    width: 150px;
+                .planet-wrap {
+                    position: static;
+                    width: 100%;
+                    margin: 0;
                 }
+
+                .planet-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 30px;
+                    width: 80%;
+                    margin: 40px auto;
+                    justify-items: center;
+                }
+
 
                 .lightning1 {
                     left: 0;
@@ -141,7 +165,7 @@
                     height: 50px;
                 }
 
-                .planets:hover {
+                .planet-wrap:hover {
                     transform: scale(1)
                 }
             }
@@ -157,7 +181,7 @@
         </a>
 
         <div class="outline team team1">
-            <a href="https://olympics.hackclub.com/" target="_blank">
+            <a>
                 <img src="/images/team.png" width="200px">
             </a>
         </div>
@@ -168,18 +192,20 @@
 
         <h2 class="blink">Open Sesame...</h2>
 
-        <div class="container outline">
-            <h1>Hello, world!</h1>
-            <p class="egg">Hi, I'm Silas! Click the planets to travel through across my site! Who knows what you may find... <span style="color: #3159b0">Hint: Saturn and Jupiter take you to my other pages.</span></p>
-
-            <h2>About This Site</h2>
-            <p>This project is a time capsule back to the early days of the internet, when the web was a place to express yourself. It is simply a collection of what I find cool on and off the internet. <span style="color: #3159b0">PS: Click everthing ;-)</span> </p>
+        <div class="planet-grid">
+            <a href="https://en.wikipedia.org/wiki/Neptune" class="planet-wrap left-planet-2"><img class="planets left-planet-2" src="/images/planets/neptune.png"></a>
+            <a href="/gallery/" class="planet-wrap left-planet-1"><img class="planets left-planet-1" src="/images/planets/saturn.png"></a>
+            <a href="https://earth.google.com/web/" class="planet-wrap right-planet-1"><img class="planets right-planet-1" src="/images/planets/earth.png"></a>
+            <a href="/jams/" class="planet-wrap right-planet-2"><img class="planets right-planet-2" src="/images/planets/jupiter.gif"></a>
         </div>
 
-        <a href="https://en.wikipedia.org/wiki/Neptune"><img class="planets left-planet-2" src="/images/planets/neptune.png"></a>
-        <a href="/pages/gallery.html"><img class="planets left-planet-1" src="/images/planets/saturn.png"></a>
-        <a href="https://earth.google.com/web/"><img class="planets right-planet-1" src="/images/planets/earth.png"></a>
-        <a href="/pages/jams.html"><img class="planets right-planet-2" src="/images/planets/jupiter.gif"></a>
+        <div class="container outline">
+            <h1>Hello, world!</h1>
+            <p>Hi, I'm Silas, and this is my personal site! Click the planets to travel through across my site! Who knows what you may find... <span style="color: #3159b0">Hint: Saturn and Jupiter take you to my other pages.</span></p>
+
+            <h2>About Me</h2>
+            <p class="egg">I am 17 and I live in Seattle, Washington. I love music (my guitar and violin), hardware projects, and the outdoors! <span style="color: #3159b0">PS: Click everthing ;-)</span> </p>
+        </div>
 
         <h2><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">welcome home</a></h2>
 

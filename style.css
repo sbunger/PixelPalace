@@ -68,6 +68,24 @@ a {
     30% { opacity: 0; }
 }
 
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinReverse {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
 @media only screen and (max-width: 600px) {
   .container {
     width: 80%;
