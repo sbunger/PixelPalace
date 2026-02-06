@@ -64,6 +64,10 @@ a {
     animation: blink 1s step-start infinite;
 }
 
+.copywrite {
+    margin: 20px;
+}
+
 @keyframes blink {
     30% { opacity: 0; }
 }
