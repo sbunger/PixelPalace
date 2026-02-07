@@ -1,5 +1,6 @@
 body {
-    font-family: "Jersey 10";
+    font-family: "Jersey 10", monospace;
+    background-color: #000000;
     background-image: url(images/BG.png);
     
     background-repeat: repeat;
@@ -12,7 +13,7 @@ body {
     margin: 0;
     padding: 0;
 
-    font-size: 25px;
+    font-size: 24px;
     color: #E3D8D8;
 }
 
@@ -21,11 +22,13 @@ img {
 }
 
 h1 {
-    font-family: "Jacquard 24";
+    font-family: "Jacquard 24", monospace;
+    font-weight: 400;
 }
 
 h2 {
-    font-family: "Jacquard 24";
+    font-family: "Jacquard 24", monospace;
+    font-weight: 400;
 }
 
 a {
