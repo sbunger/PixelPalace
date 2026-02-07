@@ -71,6 +71,13 @@
                 transition: transform 0.075s ease;
             }
 
+            .planet-text {
+                position: absolute;
+                width: 100%;
+                transform: scale(1.43) !important;
+                pointer-events: none;
+            }
+
             .planet-wrap:hover {
                 transform: scale(1.11);
             }
@@ -134,6 +141,7 @@
                     position: static;
                     width: 100%;
                     margin: 0;
+                    transform: scale(1);
                 }
 
                 .planet-grid {
@@ -163,14 +171,12 @@
                 }
 
                 .planet-wrap:hover {
-                    transform: scale(1)
+                    transform: scale(1);
                 }
             }
         </style>
     </head>
     <body>
-        <img class="lightning lightning1" src="/images/effects/lightning1.gif">
-        <img class="lightning lightning2" src="/images/effects/lightning2.gif">
 
 
         <a class="hackclub" href="https://hackclub.com/" target="_blank">
@@ -188,10 +194,22 @@
         <h2 class="blink">Open Sesame...</h2>
 
         <div class="planet-grid">
-            <a href="/arcade/" class="planet-wrap left-planet-2"><img class="planets left-planet-2" src="/images/planets/neptune.png"></a>
-            <a href="/gallery/" class="planet-wrap left-planet-1"><img class="planets left-planet-1" src="/images/planets/saturn.png"></a>
-            <a href="https://earth.google.com/web/" class="planet-wrap right-planet-1"><img class="planets right-planet-1" src="/images/planets/earth.png"></a>
-            <a href="/jams/" class="planet-wrap right-planet-2"><img class="planets right-planet-2" src="/images/planets/jupiter.gif"></a>
+            <a href="/arcade/" class="planet-wrap left-planet-2">
+                <img class="planets" src="/images/planets/neptune.png">
+                <img class="planet-text" src="/images/planets/nep.png">
+            </a>
+            <a href="/gallery/" class="planet-wrap left-planet-1">
+                <img class="planets left-planet-1" src="/images/planets/saturn.png">
+                <img class="planet-text" src="/images/planets/sat.png">
+            </a>
+            <a href="https://earth.google.com/web/" class="planet-wrap right-planet-1">
+                <img class="planets right-planet-1" src="/images/planets/earth.png">
+                <img class="planet-text" src="/images/planets/ear.png">
+            </a>
+            <a href="/jams/" class="planet-wrap right-planet-2">
+                <img class="planets right-planet-2" src="/images/planets/jupiter.gif">
+                <img class="planet-text" src="/images/planets/jup.png">
+            </a>
         </div>
 
         <div class="container outline">
