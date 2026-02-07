@@ -33,11 +33,41 @@ a {
 }
 
 .container {
-    width: 40%;
+    box-sizing: border-box;
+    
+    width: 42%;
     margin: 0 auto;
 
     background-color: black;
-    padding: 20px;
+    padding: 25px;
+    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container p {
+    margin: 20px 0;
+}
+
+.container h1 {
+    margin: 20px;
+    margin-bottom: 0;
+}
+
+.container h2 {
+    margin: 20px;
+    margin-bottom: 0;
+}
+
+.header img {
+    width: 100%;
+}
+
+.header {
+    background-color: rgba(0, 0, 0, .5);
+    margin-top: 70px;
 }
 
 .outline {
@@ -48,28 +78,39 @@ a {
 
 .team {
     background-color: #E3D8D8;
-
     margin: 20px 0;
-    padding-top: 6px;
+    padding-top: 5px;
 
     width: 100%;
 
     border-left: 0;
     border-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
 }
 
-.team1 img {margin: 11px}
+.team1 img {margin: 0;}
 
 .blink {
-    animation: blink 1s step-start infinite;
+    animation: blink 1.5s step-start infinite;
+}
+
+.blink-offset {
+    animation: blink-offset 1.5s step-start infinite;
 }
 
 .copywrite {
-    margin: 20px;
+    margin: 40px;
 }
 
 @keyframes blink {
     30% { opacity: 0; }
+}
+
+@keyframes blink-offset {
+    60% { opacity: 0; }
 }
 
 @keyframes spin {
@@ -92,6 +133,7 @@ a {
 
 @media only screen and (max-width: 600px) {
   .container {
-    width: 80%;
+    width: 85%;
+    padding: 20px;
   }
 }

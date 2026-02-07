@@ -4,7 +4,8 @@
         <meta charset="UTF-8" />
         <title>Pixel Palace</title>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="description" content="" />
+        <meta name="description" content="Personal website for Silas Unger." />
+        <meta name="theme-color" content="#000000">
         <link rel="icon" href="/images/favicon.ico">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,13 +15,83 @@
         <link rel="stylesheet" href="/style.css">
 
         <style>
-            .header {
-                background-color: rgba(0, 0, 0, .5);
+
+            .project h3 {
+                margin-top: 0;
+                font-size: 20px;
+                color: #896583;
             }
 
-            .container {
-                margin: 50px auto;
+            .project h2 {
+                margin-bottom: 0;
             }
+
+            .cornerContainer {
+                position: relative;
+            }
+
+            .corner {
+                position: absolute;
+            }
+
+            .cornerupleft {
+                top: -15px;
+                left: -15px;
+            }
+
+            .cornerupright {
+                top: -20px;
+                right: -15px;
+            }
+
+            .cornerdownright {
+                bottom: -22px;
+                right: -25px;
+                filter: drop-shadow(-10px -10px 0 #000000);
+            }
+
+            .cornerdownleft {
+                bottom: -20px;
+                left: -20px;
+                filter: drop-shadow(10px -10px 0 #000000);
+            }
+
+            .project {
+                margin-top: 30px;
+            }
+
+            .img-container {
+                box-sizing: border-box;
+                
+                margin-top: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                aspect-ratio: 10 / 4 ;
+                overflow: hidden;
+
+                padding: 10px;
+
+                border-width: 3px;
+                border-style: groove;
+                border-color: #896583;
+            }
+
+            
+            .img-container img {
+                flex: 1;
+                height: 100%;
+                object-fit: cover;
+                image-rendering: auto;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .corner {
+                    width: 100px;
+                }
+            }
+        
         </style>
     </head>
     <body>
@@ -37,9 +108,49 @@
 
         <h2 class="blink">my projects!!</h2>
 
+        
+
         <div class="container outline">
+            <div class="cornerContainer">
+                <img class="corner cornerupleft" src="/images/frames/corner1.png">
+            </div>
             <h1>Personal Projects</h1>
-            <p>View my recent projects and creations on and off the web. Come see what I've made! <span style="color: #3159b0">Under construction... </span></p>
+            <p>View my recent projects and creations on and off the web.<br> <span style="color: #3159b0">Come see what I've made!</span></p>
+            <div class="cornerContainer">
+                <img class="corner cornerdownright" src="/images/frames/corner2.png">
+            </div>
+        </div>
+
+        <h2 class="blink-offset">here they are</h2>
+
+        <div class="container outline project">
+            <div class="cornerContainer">
+                <img class="corner cornerupleft" src="/images/frames/corner4.png">
+                <img class="corner cornerupright" src="/images/frames/corner3.png">
+            </div>
+
+            <h2>PICat</h2>
+            <h3>Dec. 2025</h3>
+            <p>A pico inspired RP2040 devboard, featuring more GPIO pins, two LEDs, and a sleek design. The pin layout is very similar to the Raspberry PI Pico.</p>
+
+            <div class="img-container">
+                <img src="/images/projects/picat1.png"><img src="/images/projects/picat2.png">
+            </div>
+        </div>
+
+        <div class="container outline project">
+            <h2>Silas' Keypad</h2>
+            <h3>Nov. 2025</h3>
+            <p>This macropad has eight keys that are currently programmed to control browser and copy/paste functions, but can be programmed with other keys and even macros. The pad runs on an RP2040 devboard by Seeed Studio.</p>
+
+            <div class="img-container">
+                <img src="/images/projects/keypad1.png"><img src="/images/projects/keypad2.png">
+            </div>
+
+            <div class="cornerContainer">
+                <img class="corner cornerdownleft" src="/images/frames/corner5.png">
+                <img class="corner cornerdownright" src="/images/frames/corner6.png">
+            </div>
         </div>
 
         <p class="copywrite">© <a href="https://www.youtube.com/watch?v=9jK-NcRmVcw"><span style="color: #E3D8D8">1999</span></a> Silas Unger</p>
