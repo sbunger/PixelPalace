@@ -77,6 +77,8 @@ a {
     border-width: 3px;
     border-style: groove;
     border-color: #896583;
+
+    border-radius: 6px;
 }
 
 .team {
