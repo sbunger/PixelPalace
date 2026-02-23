@@ -1,7 +1,7 @@
 body {
     font-family: "Jersey 10", monospace;
     background-color: #000000;
-    background-image: url(images/BG.png);
+    background-image: url(images/bg/nebula.png);
     
     background-repeat: repeat;
     background-size: 200px;
@@ -13,7 +13,7 @@ body {
     margin: 0;
     padding: 0;
 
-    font-size: 24px;
+    font-size: 25px;
     color: #E3D8D8;
 }
 
@@ -38,7 +38,7 @@ a {
 .container {
     box-sizing: border-box;
     
-    width: 42%;
+    width: 41%;
     margin: 0 auto;
 
     background-color: black;
@@ -47,7 +47,7 @@ a {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 
 .container p {
@@ -70,23 +70,24 @@ a {
 
 .header {
     background-color: rgba(0, 0, 0, .5);
+    box-shadow: 15px 15px 0px 0px rgba(0, 0, 0, .5) !important;
     margin-top: 70px;
 }
 
 .outline {
+    box-sizing: border-box;
+
     border-width: 3px;
     border-style: groove;
     border-color: #896583;
 
-    border-radius: 6px;
+    box-shadow: 15px 15px 0px 0px #000000;
 }
 
 .team {
     background-color: #E3D8D8;
     margin: 20px 0;
     padding-top: 5px;
-
-    border-radius: 0;
 
     width: 100%;
 

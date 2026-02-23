@@ -69,6 +69,8 @@
             .planet-wrap {
                 position: absolute;
                 transition: transform 0.075s ease;
+
+                z-index: 100;
             }
 
             .planet-text {
@@ -120,7 +122,7 @@
             }
 
             footer img {
-                width: auto;
+                width: 100px;
             }
 
             .egg {
@@ -130,6 +132,12 @@
 
             .egg:active {
                 color: #449380;
+            }
+
+            #cat {
+                position: absolute;
+                left: 40px;
+                transform: translate(0, -130px);
             }
 
             @media only screen and (max-width: 600px) {
@@ -162,14 +170,6 @@
                     right: 0;
                 }
 
-                .hackclub {
-                    left: 10px;
-                }
-
-                .hackclub img {
-                    height: 50px;
-                }
-
                 .planet-wrap:hover {
                     transform: scale(1);
                 }
@@ -177,12 +177,6 @@
         </style>
     </head>
     <body>
-
-
-        <a class="hackclub" href="https://hackclub.com/" target="_blank">
-            <img src="/images/hackclub.png" height="60px">
-        </a>
-
         <div class="outline team team1">
             <a>
                 <img src="/images/team.png" width="200px">
@@ -228,10 +222,13 @@
             <a href="https://www.reddit.com/r/Adobe/comments/1diz1cl/why_is_adobe_the_worst_and_most_frustrating/"><img src="/images/banners/adobe_photo.gif"></a>
             <a><img src="/images/banners/nodrugs.gif"></a>
             <a href="https://www.useragentman.com/blog/2022/06/16/r-i-p-internet-explorer-a-hate-filled-love-letter/"><img src="/images/banners/50041.gif"></a>
-            <a><img src="/images/banners/hsajesusveg.gif"></a>
+            <a href="https://hackclub.com/"><img src="/images/banners/hackclub.png"></a>
         </div>
+        
+        
 
         <p class="copywrite">© <a href="https://www.youtube.com/watch?v=9jK-NcRmVcw"><span style="color: #E3D8D8">1999</span></a> Silas Unger</p>
+        <img src="/images/cat.png" width="200px" id="cat">
 
         <script>
             const logo = document.getElementById("logo");
