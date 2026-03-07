@@ -82,6 +82,11 @@ a {
     border-color: #896583;
 
     box-shadow: 15px 15px 0px 0px #000000;
+    transition: all .2s;
+}
+
+.outline:hover {
+    transform: scale(1.007);
 }
 
 .team {
@@ -140,8 +145,12 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
-  .container {
-    width: 85%;
-    padding: 20px;
-  }
+    .container {
+        width: 85%;
+        padding: 20px;
+    }
+
+    .outline:hover {
+        transform: scale(1.0);
+    }
 }

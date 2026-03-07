@@ -14,11 +14,15 @@
 
         <link rel="stylesheet" href="/style.css">
 
-        <style>      
-            .list {
-                display: inline-block; 
+        <style>
+            .list h2 {
+                margin-bottom: 0;
             }
-            
+
+            .list p {
+                margin-top: 0;
+            }
+
             ul  {
                 list-style-type: none;
                 text-align: center;
@@ -28,10 +32,12 @@
 
             .album {
                 position: absolute;
-                width: 300px
+                width: 300px;
+
+                transition: all .15s;
             }
 
-            .album .frame {
+            .frame {
                 position: absolute;
 
                 width: 100%;
@@ -40,11 +46,15 @@
                 position: relative;
                 z-index: 2;
 
-                transition: all .05s;
+                transition: all .15s;
             }
 
-            .album .frame:hover {
-                transform: scale(1.05);
+            .frame:hover {
+                transform: scale(1.025)
+            }
+
+            .album:hover {
+                transform: scale(1.05) rotate(0deg);
             }
 
             .album .picture {
@@ -59,21 +69,29 @@
             .album1 {
                 left: 5%;
                 top: 600px;
+
+                transform: rotate(3deg);
             }
 
             .album2 {
                 right: 5%;
                 top: 700px;
+
+                transform: rotate(-1deg);
             }
 
             .album3 {
                 left: 5%;
                 top: 1000px;
+
+                transform: rotate(-2deg);
             }
 
             .album4 {
                 right: 5%;
                 top: 1100px;
+
+                transform: rotate(4deg);
             }
 
             @media only screen and (max-width: 600px) {
@@ -106,56 +124,58 @@
         </div>
 
         <h2 class="blink">You gotta listen to this!</h2>
-
         <div class="container outline list">
-            <ul>
-                <li>
-                    <h2>Lucy Dacus</h2>
-                    <p>I am a huge Lucy Dacus fan! Last summer, I saw her in concert on a farm in Washinton, and it was almost definitely the best concert I have ever been to. <a href="https://open.spotify.com/album/7lQ9R31OcTvMn2MojAuKVE">No Burden</a> is my definitive favorite album (despite the fact that it may be one of the saddest albums ever).</p>
 
-                    <div class="album album1">
-                        <a href="https://open.spotify.com/album/7lQ9R31OcTvMn2MojAuKVE">
-                            <img class="picture" src="/images/albums/lucy-dacus.png">
-                            <img class="frame" src="/images/frames/frame6.png">
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <h2 >Big Thief</h2>
-                    <p>Big Thief is one of my all time favorite artists. They seem to blend funny bops (like <a href="https://open.spotify.com/track/3Q6VfeIZ1bTjWiNe2Or4LQ">Spud Infinity</a>) seamlessly with introspective songs like <a href="https://open.spotify.com/track/3HFBqhotJeEKHJzMEW31jZ">Change</a>, both in the same album. Their new album, Double Infinity was a quick favorite, and there are zero skips throughout their entire discography.</p>
+        <h2>Lucy Dacus</h2>
+        <p>
+            I'm a big Lucy Dacus fan. Last summer I saw her play a show on a farm in Washington, which ended up being one of the best concerts I've been to. <a href="https://open.spotify.com/album/7lQ9R31OcTvMn2MojAuKVE">No Burden</a> is probably my favorite album of hers, even though it is one of her saddest.
+        </p>
 
-                    <div class="album album2">
-                        <a href="https://open.spotify.com/album/1yEo1ZJE5ZgIF7LYrDTbMK">
-                            <img class="picture" src="/images/albums/big-thief.png">
-                            <img class="frame" src="/images/frames/frame6.png">
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <h2 >Aliceband</h2>
-                    <p>Aliceband is a super interesting band. The lead singer, Alice Walker (no, not that Alice Walker), mixes jazzy rythms and instruments with a more pop-focused overall sound. Their <a href="https://open.spotify.com/album/1ikXR3naSvqHn5aej1Lxtw">self titled album</a> is the most new-listener friendly, but there are some deep cuts I like such as <a href="https://open.spotify.com/track/7qiwZ5FVGHEalQjYxcVlf3">red river</a>.</p>
+        <h2>Big Thief</h2>
+        <p>
+            Big Thief is one of my favorite bands. They balance playful songs like <a href="https://open.spotify.com/track/3Q6VfeIZ1bTjWiNe2Or4LQ">Spud Infinity</a> with more reflective tracks like <a href="https://open.spotify.com/track/3HFBqhotJeEKHJzMEW31jZ">Change</a>, sometimes on the same album. Their new album, Double Infinity, quickly became my favorite, and honestly I don't think they have any misses in their discography.
+        </p>
 
-                    <div class="album album3">
-                        <a href="https://open.spotify.com/album/1ikXR3naSvqHn5aej1Lxtw">
-                            <img class="picture" src="/images/albums/aliceband.png">
-                            <img class="frame" src="/images/frames/frame6.png">
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <h2 >Fleet Foxes</h2>
-                    <p>Fleet Foxes is my background music. I love to put on an album while reading or finishing my home work. There are some "bangers," like <a href="https://open.spotify.com/track/2s7pyee9w04uQy3cNKzey9">Mykonos</a>, but they are mainly a very chill band.</p>
+        <h2>Aliceband</h2>
+        <p>
+            Aliceband is a really interesting group. The lead singer, Alice Walker (not that Alice Walker), mixes jazzy rhythms and instrumentation with a more pop-leaning sound. Their <a href="https://open.spotify.com/album/1ikXR3naSvqHn5aej1Lxtw">self-titled album</a> is probably the best place to start, but I also like some others like <a href="https://open.spotify.com/track/7qiwZ5FVGHEalQjYxcVlf3">Red River</a>.
+        </p>
 
-                    <div class="album album4">
-                        <a href="https://open.spotify.com/album/3vz6xBtlgVdLTRgK1CiPcF">
-                            <img class="picture" src="/images/albums/fleet-foxes.png">
-                            <img class="frame" src="/images/frames/frame6.png">
-                        </a>
-                    </div>
-                </li>
-            </ul>
+        <h2>Fleet Foxes</h2>
+        <p>
+        Fleet Foxes is my go-to background music. I like putting one of their albums on while reading or working. There are some upbeat songs like <a href="https://open.spotify.com/track/2s7pyee9w04uQy3cNKzey9">Mykonos</a>, but most of their music has a calm, atmospheric feel.
+        </p>
         </div>
 
-        <p class="copywrite">© <a href="https://www.youtube.com/watch?v=9jK-NcRmVcw"><span style="color: #E3D8D8">1999</span></a> Silas Unger</p>
+
+        <div class="album album1">
+            <a href="https://open.spotify.com/album/7lQ9R31OcTvMn2MojAuKVE">
+                <img class="picture" src="/images/albums/lucy-dacus.png">
+                <img class="frame" src="/images/frames/frame6.png">
+            </a>
+        </div>
+
+        <div class="album album2">
+            <a href="https://open.spotify.com/album/1yEo1ZJE5ZgIF7LYrDTbMK">
+                <img class="picture" src="/images/albums/big-thief.png">
+                <img class="frame" src="/images/frames/frame6.png">
+            </a>
+        </div>
+
+        <div class="album album3">
+            <a href="https://open.spotify.com/album/1ikXR3naSvqHn5aej1Lxtw">
+                <img class="picture" src="/images/albums/aliceband.png">
+                <img class="frame" src="/images/frames/frame6.png">
+            </a>
+        </div>
+
+        <div class="album album4">
+            <a href="https://open.spotify.com/album/3vz6xBtlgVdLTRgK1CiPcF">
+                <img class="picture" src="/images/albums/fleet-foxes.png">
+                <img class="frame" src="/images/frames/frame6.png">
+            </a>
+        </div>
+
+        <p class="copywrite">© 1999 Silas Unger</p>
     </body>
 </html>
