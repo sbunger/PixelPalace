@@ -17,6 +17,21 @@ body {
     color: #E3D8D8;
 }
 
+.app{
+    position:fixed;
+    inset:0;
+
+    background-image: url(images/bg/hover.png);
+    
+    background-repeat: repeat;
+    background-size: 200px;
+    background-attachment: fixed;
+
+    z-index: -100;
+
+    mask-image: radial-gradient(circle 0px at 0 0, transparent 0, transparent 100%);
+}
+
 img {
     image-rendering: pixelated;
 }
@@ -152,5 +167,9 @@ a {
 
     .outline:hover {
         transform: scale(1.0);
+    }
+
+    .app {
+        display: none !important;
     }
 }
