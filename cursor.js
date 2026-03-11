@@ -13,7 +13,6 @@ document.addEventListener("mousemove", (e) => {
   updateMask(e.clientX, e.clientY);
 });
 
-/* hide completely when mouse leaves */
 document.addEventListener("mouseleave", () => {
   const hidden =
     `radial-gradient(circle 0px at 0 0, transparent 0, transparent 100%)`;
