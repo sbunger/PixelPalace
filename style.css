@@ -186,7 +186,7 @@ a {
 
 .popup img {
     max-height: 75%;
-    max-width: 90%;
+    max-width: 80%;
 
     image-rendering: auto;
     transition: 0.4s all;
