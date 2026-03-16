@@ -2,9 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Pixel Palace</title>
+        <title>Photography</title>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="description" content="Personal website for Silas Unger." />
+        <meta name="description" content="Personal photography portfolio for Silas Unger." />
         <meta name="theme-color" content="#000000">
         <link rel="icon" href="/images/favicon.ico">
 
@@ -27,6 +27,7 @@
                 margin-bottom: 60px;
             }
 
+
             .box {
                 
                 display: flex;
@@ -34,10 +35,12 @@
                 align-items: center;
                 flex-direction: column;
 
+                position: relative;
+
                 aspect-ratio: 1 / 1;
             }
 
-            .box img {
+            .lightbox {
                 image-rendering: auto;
                 box-sizing: border-box;
 
@@ -78,7 +81,11 @@
     <body>
         <div id="popup" class="popup">
             <span class="close">&times;</span>
+
+            <span class="arrow left"><</span>
             <img id="popup-img">
+            <span class="arrow right">></span>
+
             <div id="popup-caption" class="caption">cat</div>
         </div>
 
@@ -90,17 +97,13 @@
             </a>
         </div>
 
-
         <div class="container outline header">
             <img src="/images/photos.png">
         </div>
 
-        <h2 class="blink">my photos</h2>
+        <h2 class="blink">my photos — click to enlarge</h2>
 
         <div class="grid container">
-            <div class="box outline wide">
-                <img class="lightbox" data-caption="Sunset Hill in Seattle, Washington" src="/images/photography/IMG_8773.JPG">
-            </div>
             <div class="box outline">
                 <img class="lightbox" src="/images/photography/IMG_8519.JPG">
             </div>
@@ -114,11 +117,14 @@
                 <img class="lightbox" data-caption="Hiking @ Poo Poo Point" src="/images/photography/IMG_8516.JPG">
             </div>
             <div class="box outline wide">
+                <img class="lightbox" data-caption="Sunset Hill in Seattle, Washington" src="/images/photography/IMG_8773.JPG">
+            </div>
+            <div class="box outline wide">
                 <img class="lightbox" data-caption="Fall train in Ballard" src="/images/photography/IMG_8705.JPG">
             </div>
         </div>
 
-        <p class="copywrite">© 1999 Silas Unger</p>
+        <p class="copywrite">© 2026 Silas Unger</p>
 
         <script src="/cursor.js"></script>
         <script src="/lightbox.js"></script>

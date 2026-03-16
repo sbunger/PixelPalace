@@ -2,9 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Pixel Palace</title>
+        <title>The Arcade</title>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="description" content="Personal website for Silas Unger." />
+        <meta name="description" content="My personal projects I have created and built over the past few years." />
         <meta name="theme-color" content="#000000">
         <link rel="icon" href="/images/favicon.ico">
 
@@ -33,6 +33,8 @@
             .corner {
                 position: absolute;
                 width: 150px;
+
+                pointer-events: none;
             }
 
             .cornerupleft {
@@ -79,7 +81,7 @@
 
             @media only screen and (max-width: 600px) {
                 .corner {
-                    width: 80px;
+                    max-width: 130px;
                 }
 
                 .img-container {
@@ -106,7 +108,11 @@
     <body>
         <div id="popup" class="popup">
             <span class="close">&times;</span>
+
+            <span class="arrow left"><</span>
             <img id="popup-img">
+            <span class="arrow right">></span>
+
             <div id="popup-caption" class="caption">cat</div>
         </div>
 
@@ -132,7 +138,7 @@
                 <img class="corner cornerupleft" src="/images/frames/corner1.png">
             </div>
             <h1>Personal Projects</h1>
-            <p>View some of my recent personal projects.<br></p>
+            <p>View some of my recent<br> personal projects.<br></p>
             <div class="cornerContainer">
                 <img class="corner cornerdownright" src="/images/frames/corner2.png">
             </div>
@@ -148,7 +154,7 @@
 
             <h2>PICat</h2>
             <h3>Dec. 2025</h3>
-            <p>A pico inspired RP2040 devboard, featuring more GPIO pins, two LEDs, and a sleek design. The pin layout is very similar to the Raspberry PI Pico.</p>
+            <p>A <a href="https://github.com/sbunger/PICAT">pico-inspired RP2040 devboard</a>, featuring more GPIO pins, two LEDs, and a sleek design. The pin layout is very similar to the Raspberry PI Pico.</p>
 
             <div class="img-container">
                 <img class="lightbox" data-caption="Custom 'advertisement' for PICat for the Hack Club magazine" src="/images/projects/picat1.png">
@@ -174,7 +180,7 @@
             </div>
         </div>
 
-        <p class="copywrite">© 1999 Silas Unger</p>
+        <p class="copywrite">© 2026 Silas Unger</p>
         <script src="/cursor.js"></script>
         <script src="/lightbox.js"></script>
     </body>

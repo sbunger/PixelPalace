@@ -203,9 +203,11 @@ a {
     font-family: "Jacquard 24", monospace;
 
     position: absolute;
-    font-size: 80px;
+    font-size: 70px;
     color: white;
     cursor: pointer;
+
+    padding: 10px;
 
     top: 30px;
     right: 50px;
@@ -221,10 +223,43 @@ a {
     cursor: pointer;
 }
 
+.arrow {
+    font-family: "Jacquard 24", monospace;
+
+    position: absolute;
+    top: 50%;
+    font-size: 70px;
+
+    padding: 10px;
+    
+    color: white;
+    cursor: pointer;
+
+    transform: translateY(-50%);
+
+    transition: .1s all;
+}
+
+.arrow.left {
+    left: 50px;
+}
+
+.arrow.right {
+    right: 50px;
+}
+
+.arrow:hover {
+    transform: translateY(calc(-50% - 2px));
+}
+
 
 @media only screen and (max-width: 600px) {
     .close {
         font-size: 65px;
+    }
+
+    .arrow {
+        display: none;
     }
 
     .close:hover {

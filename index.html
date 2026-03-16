@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Pixel Palace</title>
+        <title>Silas Unger</title>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="description" content="Personal website for Silas Unger." />
         <meta name="theme-color" content="#000000">
@@ -15,13 +15,6 @@
         <link rel="stylesheet" href="/style.css">
 
         <style>
-
-            .header {
-                background-color: rgba(0, 0, 0, .5);
-                padding: 20px;
-                cursor: pointer;
-            }
-            
             .hackclub {
                 position: absolute;
                 left: 100px;
@@ -39,32 +32,6 @@
             .planets {
                 width: 100%;
             }
-
-            .lightning {
-                width: 150px;
-                position: absolute;
-                opacity: 0.9;
-                pointer-events: none;
-            }
-
-            .lightning1 {
-                top: 150px; left: 25%;
-            }
-
-            .lightning2 {
-                top: 150px; right: 25%;
-            }
-
-            .explosion {
-                width: 300px;
-                position: absolute;
-                left: 50%;
-                top: 0;
-                transform: translateX(-50%);
-
-                pointer-events: none;
-            }
-
             
             .planet-wrap {
                 position: absolute;
@@ -112,16 +79,13 @@
             .footer {
                 background-color: #E3D8D8 !important;
 
-                margin: 20px auto;
-                padding: 20px;
-                padding-bottom: 15px;
-
-                width: 40%;
-
                 display: flex;
+                flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
                 flex-wrap: wrap;
+
+                gap: 5px;
             }
 
             footer img {
@@ -159,10 +123,6 @@
                  display: none;
                 }
 
-                .footer {
-                    width: 80%;
-                }
-
                 .planet-wrap {
                     position: static;
                     width: 100%;
@@ -177,15 +137,6 @@
                     width: 80%;
                     margin: 40px auto;
                     justify-items: center;
-                }
-
-
-                .lightning1 {
-                    left: 0;
-                }
-
-                .lightning2 {
-                    right: 0;
                 }
 
                 .planet-wrap:hover {
@@ -205,7 +156,7 @@
 
         <img class="container outline header" id="logo" src="/images/title.png" width="40%">
 
-        <h2 class="blink">Open Sesame...</h2>
+        <h2 class="blink">welcome home</h2>
 
         <div class="planet-grid">
             <a href="/arcade/" class="planet-wrap left-planet-2">
@@ -215,14 +166,6 @@
             <a href="/gallery/" class="planet-wrap left-planet-1">
                 <img class="planets left-planet-1" src="/images/planets/saturn.png">
                 <img class="planet-text" src="/images/planets/sat.png">
-            </a>
-            <a href="/photos/" class="planet-wrap right-planet-1">
-                <img class="planets right-planet-1" src="/images/planets/earth.png">
-                <img class="planet-text" src="/images/planets/ear.png">
-            </a>
-            <a href="/jams/" class="planet-wrap right-planet-2">
-                <img class="planets right-planet-2" src="/images/planets/jupiter.gif">
-                <img class="planet-text" src="/images/planets/jup.png">
             </a>
         </div>
 
@@ -239,38 +182,33 @@
             </div>
         </div>
 
-        <h2><a>welcome home</a></h2>
+        <div class="planet-grid">
+            <a href="/photos/" class="planet-wrap right-planet-1">
+                <img class="planets right-planet-1" src="/images/planets/earth.png">
+                <img class="planet-text" src="/images/planets/ear.png">
+            </a>
+            <a href="/jams/" class="planet-wrap right-planet-2">
+                <img class="planets right-planet-2" src="/images/planets/jupiter.gif">
+                <img class="planet-text" src="/images/planets/jup.png">
+            </a>
+        </div>
 
-        <div class="footer outline">
-            <a><img src="/images/banners/256_monitor_button.gif">
-            <a><img src="/images/banners/acab.gif"></a>
-            <a><img src="/images/banners/adobe_photo.gif"></a>
-            <a><img src="/images/banners/nodrugs.gif"></a>
-            <a><img src="/images/banners/50041.gif"></a>
-            <a><img src="/images/banners/hackclub.png"></a>
+        <h2>. ₊ ⊹ . ˖ .</h2>
+
+        <div class="container outline footer">
+            <img src="/images/banners/256_monitor_button.gif">
+            <img src="/images/banners/acab.gif">
+            <img src="/images/banners/adobe_photo.gif">
+            <img src="/images/banners/nodrugs.gif">
+            <img src="/images/banners/50041.gif">
+            <img src="/images/banners/hackclub.png">
         </div>
         
         
 
-        <p class="copywrite">© 1999 Silas Unger</p>
+        <p class="copywrite">© 2026 Silas Unger</p>
         <img src="/images/cat.png" width="200px" id="cat1">
         <img src="/images/cat2.png" width="180px" id="cat2">
-
-        <script>
-            const logo = document.getElementById("logo");
-
-            logo.addEventListener("click", () => {
-                const gif = document.createElement("img");
-                gif.src = "/images/effects/explosion.gif";
-                gif.className = "explosion";
-                
-                document.body.appendChild(gif);
-                
-                setTimeout(() => {
-                    gif.remove();
-                }, 1500); 
-            });
-        </script>
 
         <script src="/cursor.js"></script>
     </body>

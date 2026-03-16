@@ -2,9 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Pixel Palace</title>
+        <title>Music</title>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="description" content="Personal website for Silas Unger." />
+        <meta name="description" content="Music I am interested in." />
         <meta name="theme-color" content="#000000">
         <link rel="icon" href="/images/favicon.ico">
 
@@ -40,6 +40,8 @@
                 z-index: 2;
 
                 transition: all .15s;
+
+                pointer-events: none;
             }
 
             .frame:hover {
@@ -107,6 +109,16 @@
         </style>
     </head>
     <body>
+        <div id="popup" class="popup">
+            <span class="close">&times;</span>
+
+            <span class="arrow left"><</span>
+            <img id="popup-img">
+            <span class="arrow right">></span>
+
+            <div id="popup-caption" class="caption">cat</div>
+        </div>
+
         <div class="app"></div>
         
         <div class="team outline">
@@ -120,7 +132,7 @@
             <img src="/images/jams.png">
         </div>
 
-        <h2 class="blink">You gotta listen to this!</h2>
+        <h2 class="blink">click albums for more info!</h2>
         <div class="container outline list">
 
         <h2>Lucy Dacus</h2>
@@ -130,7 +142,7 @@
 
         <h2>Big Thief</h2>
         <p>
-            Big Thief is one of my favorite bands. They balance playful songs like <a href="https://open.spotify.com/track/3Q6VfeIZ1bTjWiNe2Or4LQ">Spud Infinity</a> with more reflective tracks like <a href="https://open.spotify.com/track/3HFBqhotJeEKHJzMEW31jZ">Change</a>, sometimes on the same album. Their new album, Double Infinity, quickly became my favorite, and honestly I don't think they have any misses in their discography.
+            Big Thief is one of my favorite bands. Their new album, Double Infinity, has quickly become my favorite, and I don't think they have any bad songs in their entire discography.
         </p>
 
         <h2>Aliceband</h2>
@@ -146,34 +158,27 @@
 
 
         <div class="album album1">
-            <a href="https://open.spotify.com/album/7lQ9R31OcTvMn2MojAuKVE">
-                <img class="picture" src="/images/albums/lucy-dacus.png">
-                <img class="frame" src="/images/frames/frame6.png">
-            </a>
+            <img class="picture lightbox" data-caption='Lucy Dacus - <a href="https://en.wikipedia.org/wiki/No_Burden">No Burden</a>' src="/images/albums/lucy-dacus.png">
+            <img class="frame" src="/images/frames/frame6.png">
         </div>
 
         <div class="album album2">
-            <a href="https://open.spotify.com/album/1yEo1ZJE5ZgIF7LYrDTbMK">
-                <img class="picture" src="/images/albums/big-thief.png">
-                <img class="frame" src="/images/frames/frame6.png">
-            </a>
+            <img class="picture lightbox" data-caption='Big Thief - <a href="https://en.wikipedia.org/wiki/Double_Infinity">Double Infinity</a>' src="/images/albums/big-thief.png">
+            <img class="frame" src="/images/frames/frame6.png">
         </div>
 
         <div class="album album3">
-            <a href="https://open.spotify.com/album/1ikXR3naSvqHn5aej1Lxtw">
-                <img class="picture" src="/images/albums/aliceband.png">
-                <img class="frame" src="/images/frames/frame6.png">
-            </a>
+            <img class="picture lightbox" data-caption='AlicebanD - <a href="https://www.alice-walker.co.uk/about">AlicebanD</a>' src="/images/albums/aliceband.png">
+            <img class="frame" src="/images/frames/frame6.png">
         </div>
 
         <div class="album album4">
-            <a href="https://open.spotify.com/album/3vz6xBtlgVdLTRgK1CiPcF">
-                <img class="picture" src="/images/albums/fleet-foxes.png">
-                <img class="frame" src="/images/frames/frame6.png">
-            </a>
+            <img class="picture lightbox" data-caption='Fleet Foxes - <a href="https://en.wikipedia.org/wiki/Sun_Giant">Sun Giant</a>' src="/images/albums/fleet-foxes.png">
+            <img class="frame" src="/images/frames/frame6.png">
         </div>
 
-        <p class="copywrite">© 1999 Silas Unger</p>
+        <p class="copywrite">© 2026 Silas Unger</p>
         <script src="/cursor.js"></script>
+        <script src="/lightbox.js"></script>
     </body>
 </html>
