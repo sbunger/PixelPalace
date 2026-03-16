@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Pixel Palace</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="description" content="Personal website for Silas Unger." />
+        <meta name="theme-color" content="#000000">
+        <link rel="icon" href="/images/favicon.ico">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jacquard+24&family=Jersey+10&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="/style.css">
+
+        <style>
+            .grid {
+                display: grid;
+
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid.container {
+                padding: 0;
+                
+                margin-bottom: 60px;
+            }
+
+            .box {
+                
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+                aspect-ratio: 1 / 1;
+            }
+
+            .box img {
+                image-rendering: auto;
+                box-sizing: border-box;
+
+                padding: 25px;
+
+                width: 100%;
+                height: 100%;
+                
+                object-fit: cover;
+            }
+
+            .wide {
+                grid-column: span 2;
+                aspect-ratio: 2 / 1;
+            }
+
+            .tall {
+                grid-row: span 2;
+                aspect-ratio: 1 / 2;
+            }
+
+            @media only screen and (max-width: 600px) {
+
+                .grid {
+                    grid-template-columns: repeat(1, 1fr);
+                }
+
+                .box {
+                    grid-column: span 1;
+                    grid-row: span 1;
+
+                    aspect-ratio: auto;
+                }
+            }
+        
+        </style>
+    </head>
+    <body>
+        <div id="popup" class="popup">
+            <span class="close">&times;</span>
+            <img id="popup-img">
+            <div id="popup-caption" class="caption">cat</div>
+        </div>
+
+        <div class="app"></div>
+
+        <div class="team outline">
+            <a href="/">
+                <img src="/images/home.png" width="200px">
+            </a>
+        </div>
+
+
+        <div class="container outline header">
+            <img src="/images/photos.png">
+        </div>
+
+        <h2 class="blink">my photos</h2>
+
+        <div class="grid container">
+            <div class="box outline wide">
+                <img class="lightbox" data-caption="Sunset Hill in Seattle, Washington" src="/images/photography/IMG_8773.JPG">
+            </div>
+            <div class="box outline">
+                <img class="lightbox" src="/images/photography/IMG_8519.JPG">
+            </div>
+            <div class="box outline tall">
+                <img class="lightbox" data-caption="Sunny day in Portland" src="/images/photography/IMG_8105.JPG">
+            </div>
+            <div class="box outline tall">
+                <img class="lightbox" data-caption="Hiking @ Poo Poo Point" src="/images/photography/IMG_8537.JPG">
+            </div>
+            <div class="box outline">
+                <img class="lightbox" data-caption="Hiking @ Poo Poo Point" src="/images/photography/IMG_8516.JPG">
+            </div>
+            <div class="box outline wide">
+                <img class="lightbox" data-caption="Fall train in Ballard" src="/images/photography/IMG_8705.JPG">
+            </div>
+        </div>
+
+        <p class="copywrite">© 1999 Silas Unger</p>
+
+        <script src="/cursor.js"></script>
+        <script src="/lightbox.js"></script>
+    </body>
+</html>

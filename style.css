@@ -55,8 +55,6 @@ a {
     
     width: 41%;
     margin: 0 auto;
-
-    background-color: black;
     padding: 25px;
     
     display: flex;
@@ -84,7 +82,7 @@ a {
 }
 
 .header {
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, .5) !important;
     box-shadow: 15px 15px 0px 0px rgba(0, 0, 0, .5) !important;
     margin-top: 70px;
 }
@@ -95,6 +93,8 @@ a {
     border-width: 3px;
     border-style: groove;
     border-color: #896583;
+
+    background-color: black;
 
     box-shadow: 15px 15px 0px 0px #000000;
     transition: all .2s;
@@ -159,7 +159,78 @@ a {
     }
 }
 
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+
+    justify-content: center;
+    align-items: center;
+    
+    opacity: 0;
+    pointer-events: none;
+    transition: .2s all;
+}
+
+.popup.shown {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+
+.popup img {
+    max-height: 75%;
+    max-width: 90%;
+
+    image-rendering: auto;
+    transition: 0.4s all;
+
+    transform: scale(0.7);
+    position: relative;
+}
+
+.popup.shown img {
+    transform: scale(1);
+}
+
+.close {
+    font-family: "Jacquard 24", monospace;
+
+    position: absolute;
+    font-size: 80px;
+    color: white;
+    cursor: pointer;
+
+    top: 30px;
+    right: 50px;
+
+    transition: .1s all;
+}
+
+.close:hover {
+    transform: translate(0, -2px);
+}
+
+.lightbox {
+    cursor: pointer;
+}
+
+
 @media only screen and (max-width: 600px) {
+    .close {
+        font-size: 65px;
+    }
+
+    .close:hover {
+        transform: translate(0);
+    }
+
     .container {
         width: 85%;
         padding: 20px;
