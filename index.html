@@ -112,6 +112,39 @@
             #iconcontainer {
                 margin-top: 0;
             }
+
+
+            .ad {
+                border: none;
+
+                width: 100%;
+                aspect-ratio: 722 / 82;
+                margin-top: 4px;
+            }
+
+            .ad-wrapper {
+                position: relative;
+                display: inline-block;
+
+                aspect-ratio: 722 / 84;
+            }
+
+            .ad-label {
+                position: absolute;
+                bottom: 11px;
+                right: 4px;
+
+                background-color: #000000b1;
+                font-size: 16px;
+                padding: 1px 6px;
+
+                transition: .1s all;
+            }
+
+            .ad-sect:hover .ad-label {
+                opacity: 0;
+                pointer-events: none;
+            }
             
 
             @media only screen and (max-width: 600px) {
@@ -203,7 +236,15 @@
             <img src="/images/banners/50041.gif">
             <img src="/images/banners/hackclub.png">
         </div>
+
+        <h2>⊹˖° . ₊ ⊹</h2>
         
+        <div class="ad-sect outline container">
+            <div class="ad-wrapper">
+                <iframe class="ad" referrerpolicy="origin" src="https://hack.irispond.net/serve"></iframe>
+                <div class="ad-label">hackvertisement</div>
+            </div>
+        </div>
         
 
         <p class="copywrite">© 2026 Silas Unger</p>
