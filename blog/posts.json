@@ -4,9 +4,9 @@
     "date": "2026-3-28",
     "description": "This morning, I cleaned up our rasied vegetable garden for the next season, and the sun was shining. I cleared the leaves and weeds and fertilized with compost. Earlier this week, I started some cucumbers, tomatoes, and peppers inside, which are just starting to sprout!",
     "images": [
-      { "src": "/images/blog/IMG_2932.JPG", "caption": "Cucumber seedling sprouts" },
-      { "src": "/images/blog/IMG_2891.JPG", "caption": "Camellia tree near me in bloom" },
-      { "src": "/images/blog/IMG_2892.JPG", "caption": "Garden beds ready for spring" }
+      { "src": "/images/blog/IMG_2932.jpg", "caption": "Cucumber seedling sprouts" },
+      { "src": "/images/blog/IMG_2891.jpg", "caption": "Camellia tree near me in bloom" },
+      { "src": "/images/blog/IMG_2892.jpg", "caption": "Garden beds ready for spring" }
     ]
   }
 ]
