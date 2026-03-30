@@ -14,11 +14,11 @@ body {
 
 .parallax-bg {
     position: fixed;
-    top: 0;
+    top: -50px;
     left: 0;
 
     width: 100%;
-    height: 100%;
+    height: 110%;
 
     background-image: url('images/bg/nebula.png');
     background-repeat: repeat;
@@ -188,10 +188,14 @@ a {
     max-width: 80%;
 
     image-rendering: auto;
-    transition: 0.4s all;
+    transition: 0.3s all;
 
     transform: scale(0.7);
     position: relative;
+}
+
+.popup.shown img:hover {
+    transform: scale(1.01) !important;
 }
 
 .popup.shown img {

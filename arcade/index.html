@@ -26,6 +26,10 @@
                 margin-bottom: 0;
             }
 
+            .project p {
+                text-align: justify;
+            }
+
             .cornerContainer {
                 position: relative;
             }
@@ -60,46 +64,22 @@
             }
 
             .img-container {
-                box-sizing: border-box;
-                
-                margin-top: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                height: 220px;
-                overflow: hidden;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
             }
 
-            
             .img-container img {
-                flex: 1;
-                height: 100%;
+                width: 100%;
+                height: 210px;
                 object-fit: cover;
+                cursor: pointer;
                 image-rendering: auto;
             }
 
             @media only screen and (max-width: 600px) {
                 .corner {
                     max-width: 130px;
-                }
-
-                .img-container {
-                    display: block;
-                    height: auto;
-
-                    overflow: auto;
-
-                    border: none;
-                }
-
-                .img-container img {
-                    box-sizing: border-box;
-                    width: 100%;
-                    height: auto;
-                    object-fit: contain;
-
-                    margin-top: 20px;
                 }
             }
         
@@ -129,7 +109,7 @@
             <img src="/images/arcade.png">
         </div>
 
-        <h2 class="blink">my projects!!</h2>
+        <h2 class="blink">my projects</h2>
 
         
 
@@ -180,7 +160,7 @@
         <div class="container outline project">
             <h2>Splitboard</h2>
             <h3>Feb. 2025</h3>
-            <p>A custom split keyboard with 60 keys and an ergonomic design. Made using a grant from the <a href="https://blueprint.hackclub.com/projects/9408">Blueprint</a> program. Currently a work in progress!</p>
+            <p>A custom split keyboard with 60 keys and an ergonomic design. Made using a grant from the <a href="https://blueprint.hackclub.com/projects/9408">Blueprint</a> program. Currently a work in progress..</p>
 
             <div class="img-container">
                 <img class="lightbox" data-caption="Left side full assembly and soldering completed" src="/images/projects/split1.png">

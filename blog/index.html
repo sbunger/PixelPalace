@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Blog</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="description" content="Blog." />
+        <meta name="theme-color" content="#000000">
+        <link rel="icon" href="/images/favicon.ico">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jacquard+24&family=Jersey+10&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="/style.css">
+
+        <style>
+            .post {
+                margin-bottom: 60px;
+            }
+
+            .blog-header {
+                display: flex;
+                flex-direction: row;
+                
+                justify-content: space-between;
+                align-items: top;
+            }
+
+            .blog-header h2 {
+                margin: 0;
+            }
+
+            .blog-header h3 {
+                margin: 0;
+                color: #896583;
+                font-size: 20px;
+                margin-top: 5px;
+            }
+
+            .img-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .img-container img {
+                width: 100%;
+                height: 210px;
+                object-fit: cover;
+                cursor: pointer;
+                image-rendering: auto;
+            }
+
+            .img-container:has(img:nth-child(1):only-child) img {
+                height: auto;
+                max-width: 100%;
+                object-fit: contain;
+            }
+
+            #load-more {
+                cursor: pointer;
+            }
+
+            #load-more h2 {
+                margin: 0;
+            }
+
+            @media only screen and (max-width: 600px) {
+
+            }
+        </style>
+    </head>
+    <body>
+        <div class="parallax-bg"></div>
+
+        <div id="popup" class="popup">
+            <span class="close">&times;</span>
+
+            <span class="arrow left"><</span>
+            <img id="popup-img">
+            <span class="arrow right">></span>
+
+            <div id="popup-caption" class="caption">cat</div>
+        </div>
+
+        <div class="team outline">
+            <a href="/">
+                <img src="/images/home.png" width="200px">
+            </a>
+        </div>
+
+        <div class="container outline header">
+            <img src="/images/blog.png">
+        </div>
+
+        <h2 class="blink">what i'm up to</h2>
+
+        <div id="posts"></div>
+        <div style="text-align:center; margin:30px 0;">
+            <div id="load-more" class="outline container header"><h2>Load More</h2></div>
+        </div>
+        <script src="/blog/blog.js"></script>
+
+        <p class="copywrite">© 2026 Silas Unger</p>
+        <script src="/lightbox.js"></script>
+        <script src="/parallax.js"></script>
+    </body>
+</html>
