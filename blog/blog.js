@@ -41,11 +41,10 @@ function showPosts() {
         const imgContainer = document.createElement("div");
         imgContainer.className = "img-container";
 
+        // Remove lightbox-related attributes
         post.images.forEach(img => {
             const image = document.createElement("img");
-            image.className = "lightbox"; // lightbox.js handles click
             image.src = img.src;
-            image.dataset.caption = img.caption;
             imgContainer.appendChild(image);
         });
 

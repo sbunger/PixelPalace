@@ -6,12 +6,8 @@ const leftArrow = document.querySelector(".arrow.left");
 const rightArrow = document.querySelector(".arrow.right");
 
 let currentImageIndex = 0;
-let images = []; // cache of all current images
-
-// Update the images cache whenever new posts are loaded
-function refreshImages() {
-    images = Array.from(document.querySelectorAll(".lightbox"));
-}
+// Cache all images on page load
+const images = Array.from(document.querySelectorAll(".lightbox"));
 
 // Show the image at a given index
 function showImage(index) {
@@ -29,14 +25,12 @@ function showImage(index) {
     currentImageIndex = index;
 }
 
-// Use event delegation for dynamically added images
-document.body.addEventListener("click", (e) => {
-    if (e.target.classList.contains("lightbox")) {
-        refreshImages(); // update cache in case new posts were added
-        currentImageIndex = images.indexOf(e.target);
-        showImage(currentImageIndex);
+// Open popup on image click
+images.forEach((img, index) => {
+    img.addEventListener("click", () => {
+        showImage(index);
         popup.classList.add("shown");
-    }
+    });
 });
 
 // Arrows
