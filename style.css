@@ -33,14 +33,39 @@ img {
     image-rendering: pixelated;
 }
 
+p {
+    margin: 5px 0;
+    text-align: left;
+}
+
 h1 {
     font-family: "Jacquard 24", monospace;
     font-weight: 400;
+
+    margin: 15px 0;
+
+    text-align: left;
 }
 
 h2 {
     font-family: "Jacquard 24", monospace;
     font-weight: 400;
+
+    margin: 10px 0;
+
+    text-align: left;
+}
+
+h3 {
+    text-align: left;
+
+    margin: 5px 0;
+}
+
+.center {
+    text-align: center;
+
+    margin: 35px 0;
 }
 
 a {
@@ -58,20 +83,6 @@ a {
     justify-content: center;
     flex-direction: column;
     gap: 20px;
-}
-
-.container p {
-    margin: 20px 0;
-}
-
-.container h1 {
-    margin: 20px;
-    margin-bottom: 0;
-}
-
-.container h2 {
-    margin: 20px;
-    margin-bottom: 0;
 }
 
 .header img {
@@ -128,6 +139,10 @@ a {
 
 .copywrite {
     margin: 40px;
+}
+
+.team:hover {
+    transform: scale(1);
 }
 
 @keyframes blink {
