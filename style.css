@@ -92,7 +92,7 @@ a {
 .header {
     background-color: rgba(0, 0, 0, .5) !important;
     box-shadow: 15px 15px 0px 0px rgba(0, 0, 0, .5) !important;
-    margin-top: 70px;
+    margin-top: 140px;
 }
 
 .outline {
@@ -113,10 +113,12 @@ a {
 }
 
 .team {
+    position: fixed;
     background-color: #E3D8D8;
-    margin: 20px 0;
-    padding-top: 5px;
 
+    padding-top: 5px;
+    margin-top: 15px;
+    top: 0;
     width: 100%;
 
     border-left: 0;
@@ -125,6 +127,10 @@ a {
     align-items: center;
     justify-content: center;
     height: 60px;
+
+    z-index: 500;
+
+    box-shadow: none;
 }
 
 .team1 img {margin: 0;}

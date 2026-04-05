@@ -152,7 +152,6 @@
 
             .team {
                 overflow: hidden;
-                position: relative;
             }
 
             .team-track {
@@ -167,17 +166,21 @@
                 color: #896583;
 
                 font-size: 30px;
-                transform: translateY(-1px);
+                transform: translateY(-2.5px);
+
+                text-align: center;
             }
 
             .time {
-                width: 200px;
+                width: 120px;
+                color: #000 !important;
             }
             .date {
-                width: 220px;
+                width: 120px;
+                color: #3159b0 !important;
             }
             .weather {
-                width: 420px;
+                width: 320px;
             }
 
             @keyframes scrollLoop {
@@ -257,7 +260,11 @@
             fillTrack();
 
             let x = 0;
-            const trackSpeed = 0.3;
+            let trackSpeed = 0.3;
+
+            if (window.innerWidth < 700) {
+                trackSpeed = .8
+            }
 
             function animate() {
                 x -= trackSpeed;
