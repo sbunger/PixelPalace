@@ -314,7 +314,7 @@
                     const temp = Math.round(data.current_weather.temperature);
                     const wind = data.current_weather.windspeed;
 
-                    const weatherText = `Seattle: ${temp * 1.8 + 32}°C • wind ${Math.round(wind * 0.621371)}mi/h`;
+                    const weatherText = `Seattle: ${Math.round(temp * 1.8 + 32)}°C • wind ${Math.round(wind * 0.621371)}mi/h`;
 
                     document.querySelectorAll(".weather").forEach(el => {
                         el.textContent = weatherText;
