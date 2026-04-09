@@ -15,9 +15,10 @@ async function updateSpotify() {
         const container = document.getElementById("spotify-container");
 
         if (!data.isPlaying) {
-            song.innerHTML = "A little quiet right now..."
+            song.innerHTML = "It's a little quiet right now..."
             album.style.display = "none";
             container.style.backgroundColor = "#000";
+            song.style.color = "#fff";
             return;
         }
 

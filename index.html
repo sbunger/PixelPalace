@@ -167,6 +167,7 @@
 
             #spotify-container {
                 background-color: black;
+                box-shadow: none;
 
                 display: flex;
                 flex-direction: row;
@@ -176,12 +177,16 @@
                 gap: 30px;
                 border: none;
 
-                transition: background 3s, transform .2s, color 1.5s;
+                transition: background 3s, transform .2s;
             }
 
             #spotify-container img {
                 width: 100px;
                 image-rendering: auto;
+            }
+
+            #spotify-song {
+                transition: color 1s;
             }
 
             #spotify-container p {
