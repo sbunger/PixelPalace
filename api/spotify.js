@@ -2,6 +2,12 @@ import express from "express";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 import cors from "cors";
 import * as Vibrant from "node-vibrant/node";
 
@@ -80,13 +86,16 @@ app.get("/now-playing", async (req, res) => {
             elapsed: song.progress_ms,
             duration: song.item.duration_ms,
             color: dominantColor,
-            textColor: textColor
+            textColor: textColor,
+            url: song.item.external_urls.spotify
         });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "fail" });
     }
 });
+
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

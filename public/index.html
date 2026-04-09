@@ -177,12 +177,26 @@
                 gap: 30px;
                 border: none;
 
-                transition: background 3s, transform .2s;
+                transition: background 3s, transform .2s, filter .2s;
+            }
+
+            #spotify-container:hover {
+                filter: brightness(90%);
+            }
+
+            #spotify-container:hover img {
+                filter: brightness(110%);
             }
 
             #spotify-container img {
                 width: 100px;
                 image-rendering: auto;
+
+                transition: all .2s;
+            }
+
+            #spotify-container img:hover {
+                transform: scale(1.05);
             }
 
             #spotify-song {
@@ -309,7 +323,7 @@
             <div id="spotify-song">
                 Loading Spotify...
             </div>
-            <img id="spotify-album">
+            <a id="spotify-link" target="_blank"><img id="spotify-album"></a>
         </div>
         
         <script src="/spotifyUI.js"></script>

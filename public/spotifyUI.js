@@ -7,12 +7,13 @@ function formatTime(ms) {
 
 async function updateSpotify() {
     try {
-        const res = await fetch("http://127.0.0.1:6000/now-playing");
+        const res = await fetch("/now-playing");
         const data = await res.json();
 
         const song = document.getElementById("spotify-song");
         const album = document.getElementById("spotify-album");
         const container = document.getElementById("spotify-container");
+        const link = document.getElementById("spotify-link");
 
         if (!data.isPlaying) {
             song.innerHTML = "It's a little quiet right now..."
@@ -32,6 +33,8 @@ async function updateSpotify() {
 
         album.style.display = "block";
         album.src = data.albumArt;
+        link.href = data.url;
+
         container.style.backgroundColor = data.color;
     } catch (err) {
         console.error(err);

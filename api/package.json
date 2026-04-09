@@ -5,6 +5,7 @@
   "type": "module",
   "main": "spotify.js",
   "scripts": {
+    "start": "node spotify.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
