@@ -7,7 +7,7 @@ function formatTime(ms) {
 
 async function updateSpotify() {
     try {
-        const res = await fetch("http://127.0.0.1:3000/now-playing");
+        const res = await fetch("http://127.0.0.1:6000/now-playing");
         const data = await res.json();
 
         const song = document.getElementById("spotify-song");
