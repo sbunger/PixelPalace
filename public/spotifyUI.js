@@ -38,7 +38,7 @@ async function updateSpotify() {
         container.style.backgroundColor = data.color;
     } catch (err) {
         console.error(err);
-        document.getElementById("spotify").innerText = "Error loading music :(";
+        document.getElementById("spotify-song").innerText = "Error loading music :(";
     }
 }
 
