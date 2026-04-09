@@ -1,0 +1,42 @@
+function formatTime(ms) {
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+async function updateSpotify() {
+    try {
+        const res = await fetch("http://127.0.0.1:3000/now-playing");
+        const data = await res.json();
+
+        const song = document.getElementById("spotify-song");
+        const album = document.getElementById("spotify-album");
+        const container = document.getElementById("spotify-container");
+
+        if (!data.isPlaying) {
+            song.innerHTML = "A little quiet right now..."
+            album.style.display = "none";
+            container.style.backgroundColor = "#000";
+            return;
+        }
+
+        song.innerHTML = `
+            <p style="opacity: 0.85">Listening Now:</p>
+            <h2>${data.title}</h2>
+            <p>${data.artist} • ${formatTime(data.elapsed)}</p>
+        `;
+        song.style.color = data.textColor;
+        console.log(data.textColor);
+
+        album.style.display = "block";
+        album.src = data.albumArt;
+        container.style.backgroundColor = data.color;
+    } catch (err) {
+        console.error(err);
+        document.getElementById("spotify").innerText = "Error loading music :(";
+    }
+}
+
+updateSpotify();
+setInterval(updateSpotify, 500);

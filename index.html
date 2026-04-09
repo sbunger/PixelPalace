@@ -117,39 +117,6 @@
                 gap: 12px;
             }
 
-
-            .hack {
-                border: none;
-
-                width: 100%;
-                aspect-ratio: 722 / 88;
-                margin-top: 6px;
-            }
-
-            .hack-wrapper {
-                position: relative;
-                display: inline-block;
-
-                aspect-ratio: 722 / 84;
-            }
-
-            .hack-label {
-                position: absolute;
-                bottom: 11px;
-                right: 4px;
-
-                background-color: #000000b1;
-                font-size: 16px;
-                padding: 1px 6px;
-
-                transition: .1s all;
-            }
-
-            .hack-sect:hover .hack-label {
-                opacity: 0;
-                pointer-events: none;
-            }
-
             .team {
                 overflow: hidden;
             }
@@ -157,6 +124,8 @@
             .team-track {
                 display: flex;
                 width: max-content;
+
+                white-space: nowrap;
                 
                 will-change: transform;
                 gap: 70px;
@@ -175,30 +144,60 @@
                 width: 120px;
                 color: #000 !important;
             }
+
             .date {
                 width: 120px;
                 color: #3159b0 !important;
             }
+
             .weather {
                 width: 320px;
             }
 
-            @keyframes scrollLoop {
-                0% {
-                    transform: translateX(0);
-                }
-                100% {
-                    transform: translateX(-50%);
-                }
+            .scroll {
+                animation: loop 40s linear infinite;
             }
 
-            @keyframes scrollText {
-                0% {
-                    transform: translateX(0%);
-                }
-                100% {
-                    transform: translateX(-100%);
-                }
+            .scroll.scroll2 {
+                transform: translateX(100%);
+                animation-delay: 20s;
+            }
+
+
+
+            #spotify-container {
+                background-color: black;
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                
+                gap: 30px;
+                border: none;
+
+                transition: background 3s, transform .2s, color 1.5s;
+            }
+
+            #spotify-container img {
+                width: 100px;
+                image-rendering: auto;
+            }
+
+            #spotify-container p {
+                font-size: 20px;
+                margin: 0;
+            }
+
+            #spotify-container h2 {
+                margin-top: 8px;
+                margin-bottom: 4px;
+                font-size: 35px;
+            }
+
+            @keyframes loop {
+                0% {transform: translateX(100%);}
+                100% {transform: translateX(-100%);}
             }
 
             @media only screen and (max-width: 600px) {
@@ -240,101 +239,25 @@
         <div class="parallax-bg"></div>
 
         <div class="outline team">
-            <div class="team-track" id="teamTrack">
+            <div class="team-track scroll scroll1">
+                <h2 class="time"></h2>
+                <h2 class="date"></h2>
+                <h2 class="weather">loading weather...</h2>
+                <h2 class="time"></h2>
+                <h2 class="date"></h2>
+                <h2 class="weather">loading weather...</h2>
+            </div>
+            <div class="team-track scroll scroll2">
+                <h2 class="time"></h2>
+                <h2 class="date"></h2>
+                <h2 class="weather">loading weather...</h2>
                 <h2 class="time"></h2>
                 <h2 class="date"></h2>
                 <h2 class="weather">loading weather...</h2>
             </div>
         </div>
-        
-        <script>
-            const track = document.getElementById("teamTrack");
 
-            function fillTrack() {
-                const original = track.innerHTML;
-                while (track.scrollWidth < window.innerWidth * 2) {
-                    track.innerHTML += original;
-                }
-            }
-
-            fillTrack();
-
-            let x = 0;
-            let trackSpeed = 0.3;
-
-            if (window.innerWidth < 700) {
-                trackSpeed = .8
-            }
-
-            function animate() {
-                x -= trackSpeed;
-
-                if (Math.abs(x) >= track.scrollWidth / 2) {
-                    x = 0;
-                }
-
-                track.style.transform = `translateX(${x}px)`;
-                requestAnimationFrame(animate);
-            }
-
-            function updateData() {
-                const now = new Date();
-
-                const timeString = now.toLocaleTimeString([], {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit'
-                });
-
-                const dateString = now.toLocaleDateString([], {
-                    weekday: 'short',
-                    month: 'short',
-                    day: 'numeric'
-                });
-
-                document.querySelectorAll(".time").forEach(el => {
-                    el.textContent = timeString.toLowerCase();
-                });
-
-                document.querySelectorAll(".date").forEach(el => {
-                    el.textContent = dateString;
-                });
-            }
-
-            async function updateWeather() {
-                try {
-                    const lat = 47.6062;
-                    const lon = -122.3321;
-
-                    const res = await fetch(
-                        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
-                    );
-
-                    const data = await res.json();
-                    const temp = Math.round(data.current_weather.temperature);
-                    const wind = data.current_weather.windspeed;
-
-                    const weatherText = `Seattle: ${Math.round(temp * 1.8 + 32)}°C • wind ${Math.round(wind * 0.621371)}mi/h`;
-
-                    document.querySelectorAll(".weather").forEach(el => {
-                        el.textContent = weatherText;
-                    });
-
-                } catch (err) {
-                    document.querySelectorAll(".weather").forEach(el => {
-                        el.textContent = "weather unavailable";
-                    });
-                }
-            }
-
-            setInterval(updateData, 10);
-            setInterval(updateWeather, 100000);
-
-            updateData();
-            updateWeather();
-
-            animate();
-        </script>
+        <script src="/weather.js"></script>
 
         <img class="container outline header" id="logo" src="/images/title.png" width="40%">
 
@@ -377,6 +300,17 @@
 
         <h2 class="center">. ₊ ⊹ . ˖ .</h2>
 
+        <div id="spotify-container" class="container outline">
+            <div id="spotify-song">
+                Loading Spotify...
+            </div>
+            <img id="spotify-album">
+        </div>
+        
+        <script src="/spotifyUI.js"></script>
+
+        <h2 class="center">. ₊ ⊹ . ˖ .</h2>
+
         <div class="container outline footer">
             <img src="/images/banners/256_monitor_button.gif">
             <img src="/images/banners/acab.gif">
@@ -384,15 +318,6 @@
             <img src="/images/banners/nodrugs.gif">
             <img src="/images/banners/50041.gif">
             <img src="/images/banners/hackclub.png">
-        </div>
-
-        <br><br>
-        
-        <div class="hack-sect outline container">
-            <div class="hack-wrapper">
-                <iframe class="hack" referrerpolicy="origin" src="https://hack.irispond.net/serve"></iframe>
-                <div class="hack-label">advertisement</div>
-            </div>
         </div>
         
 
