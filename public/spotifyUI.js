@@ -29,7 +29,6 @@ async function updateSpotify() {
             <p>${data.artist} • ${formatTime(data.elapsed)}</p>
         `;
         song.style.color = data.textColor;
-        console.log(data.textColor);
 
         album.style.display = "block";
         album.src = data.albumArt;
