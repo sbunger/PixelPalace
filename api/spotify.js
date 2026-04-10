@@ -74,9 +74,12 @@ app.get("/now-playing", async (req, res) => {
 
         const vibrant = new Vibrant.Vibrant(song.item.album.images[0].url);
         const palette = await vibrant.getPalette();
-        const dominantColor = palette.Vibrant ? palette.Vibrant.hex : "#000";
 
-        const textColor = getContrastingTextColor(dominantColor);
+        const darkVibrant = palette.DarkVibrant.hex;
+        const vibrantColor = palette.Vibrant.hex;
+        const muted = palette.Muted.hex;
+
+        const textColor = getContrastingTextColor(vibrantColor);
 
         res.json({
             isPlaying: song.is_playing,
@@ -85,7 +88,9 @@ app.get("/now-playing", async (req, res) => {
             albumArt: song.item.album.images[0].url,
             elapsed: song.progress_ms,
             duration: song.item.duration_ms,
-            color: dominantColor,
+            darkVibrant: darkVibrant,
+            vibrantColor: vibrantColor,
+            muted: muted,
             textColor: textColor,
             url: song.item.external_urls.spotify
         });

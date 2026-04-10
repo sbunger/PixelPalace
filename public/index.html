@@ -180,13 +180,6 @@
                 transition: background 3s, transform .2s, filter .2s;
             }
 
-            #spotify-container:hover {
-                filter: brightness(90%);
-            }
-
-            #spotify-container:hover img {
-                filter: brightness(110%);
-            }
 
             #spotify-container img {
                 width: 100px;
@@ -206,6 +199,8 @@
             #spotify-container p {
                 font-size: 20px;
                 margin: 0;
+
+                transition: color 1s;
             }
 
             #spotify-container h2 {
@@ -317,11 +312,16 @@
             </a>
         </div>
 
-        <h2 class="center">. ₊ ⊹ . ˖ .</h2>
+        <h2 class="center">₊ ⊹ ˖/h2>
 
         <div id="spotify-container" class="container outline">
+            <div>
+            <p id="now-playing">
+                Listening Now:
+            </p>
             <div id="spotify-song">
                 Loading Spotify...
+            </div>
             </div>
             <a id="spotify-link" target="_blank"><img id="spotify-album"></a>
         </div>

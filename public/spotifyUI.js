@@ -11,6 +11,8 @@ async function updateSpotify() {
         const data = await res.json();
 
         const song = document.getElementById("spotify-song");
+        const nowPlaying = document.getElementById("now-playing");
+
         const album = document.getElementById("spotify-album");
         const container = document.getElementById("spotify-container");
         const link = document.getElementById("spotify-link");
@@ -23,10 +25,11 @@ async function updateSpotify() {
             return;
         }
 
+        nowPlaying.style.color = data.darkVibrant;
+
         song.innerHTML = `
-            <p style="opacity: 0.85">Listening Now:</p>
             <h2>${data.title}</h2>
-            <p>${data.artist} • ${formatTime(data.elapsed)}</p>
+            <p>${data.artist} • ${formatTime(data.elapsed)} / ${formatTime(data.duration)}</p>
         `;
         song.style.color = data.textColor;
 
@@ -34,7 +37,7 @@ async function updateSpotify() {
         album.src = data.albumArt;
         link.href = data.url;
 
-        container.style.backgroundColor = data.color;
+        container.style.backgroundColor = data.vibrantColor;
     } catch (err) {
         console.error(err);
         document.getElementById("spotify-song").innerText = "Error loading music :(";
