@@ -21,6 +21,8 @@ async function updateSpotify() {
             song.innerHTML = "It's a little quiet right now..."
             album.style.display = "none";
             container.style.backgroundColor = "#000";
+
+            nowPlaying.style.color = "#fff";
             song.style.color = "#fff";
             return;
         }
