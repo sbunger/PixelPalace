@@ -22,6 +22,9 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 
+let lastPlayedSong = null;
+let lastListened = null;
+
 async function getAccessToken() {
     const response = await fetch("https://accounts.spotify.com/api/token", {
         method: "POST",
@@ -52,7 +55,7 @@ function getContrastingTextColor(hex) {
     return luminance > 0.5 ? "#000000" : "#FFFFFF";
 }
 
-app.get("/now-playing", async (req, res) => {
+async function updateNowPlaying() {
     try {
         const accessToken = await getAccessToken();
 
@@ -66,11 +69,12 @@ app.get("/now-playing", async (req, res) => {
         );
 
         if (response.status === 204 || response.status === 202) {
-            console.log("failed");
-            return res.json({ isPlaying: false });
+            return;
         }
 
         const song = await response.json();
+
+        if (!song.item) return;
 
         const vibrant = new Vibrant.Vibrant(song.item.album.images[0].url);
         const palette = await vibrant.getPalette();
@@ -81,27 +85,43 @@ app.get("/now-playing", async (req, res) => {
 
         const textColor = getContrastingTextColor(vibrantColor);
 
-        res.json({
+        if (song.is_playing) {
+            lastListened = new Date().toISOString();
+        }
+
+        lastPlayedSong = {
             isPlaying: song.is_playing,
             title: song.item.name,
             artist: song.item.artists.map(a => a.name).join(", "),
             albumArt: song.item.album.images[0].url,
             elapsed: song.progress_ms,
             duration: song.item.duration_ms,
-            darkVibrant: darkVibrant,
-            vibrantColor: vibrantColor,
-            muted: muted,
-            textColor: textColor,
-            url: song.item.external_urls.spotify
-        });
+            darkVibrant,
+            vibrantColor,
+            muted,
+            textColor,
+            url: song.item.external_urls.spotify,
+            lastListened
+        };
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "fail" });
+        console.error("Background update failed:", err);
     }
+}
+
+app.get("/now-playing", (req, res) => {
+    if (!lastPlayedSong) {
+        return res.json({ isPlaying: false });
+    }
+
+    res.json(lastPlayedSong);
 });
 
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+
+  updateNowPlaying();
+
+  setInterval(updateNowPlaying, 3000);
 });

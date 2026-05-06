@@ -5,6 +5,26 @@ function formatTime(ms) {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
 
+function timeAgo(timestamp) {
+    if (!timestamp) return "never";
+
+    const now = Date.now();
+    const past = new Date(timestamp).getTime();
+    const diff = Math.floor((now - past) / 1000); // seconds
+
+    if (diff < 5) return "just now";
+    if (diff < 60) return `${diff}s ago`;
+
+    const minutes = Math.floor(diff / 60);
+    if (minutes < 60) return `${minutes}m ago`;
+
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+
+    const days = Math.floor(hours / 24);
+    return `${days}d ago`;
+}
+
 async function updateSpotify() {
     try {
         const res = await fetch("/now-playing");
@@ -17,20 +37,17 @@ async function updateSpotify() {
         const container = document.getElementById("spotify-container");
         const link = document.getElementById("spotify-link");
 
-        if (!data.isPlaying) {
-            song.innerHTML = "It's a little quiet right now..."
-            album.style.display = "none";
-            container.style.backgroundColor = "#000";
-
-            nowPlaying.style.color = "#fff";
-            song.style.color = "#fff";
-            return;
-        }
-
+        container.style.backgroundColor = data.vibrantColor;
         nowPlaying.style.color = data.darkVibrant;
 
+        nowPlaying.innerHTML = data.isPlaying
+            ? "Listening Now"
+            : `Last listened ${timeAgo(data.lastListened)}`;
+
+        container.style.filter = data.isPlaying ? "brightness(1)" : "brightness(0.9)";
+
         song.innerHTML = `
-            <h2>${data.title}</h2>
+            <h2>${data.title} ${data.isPlaying ? '<span class="blink">•</span>' : ''}</h2>
             <p>${data.artist} • ${formatTime(data.elapsed)} / ${formatTime(data.duration)}</p>
         `;
         song.style.color = data.textColor;
@@ -38,8 +55,6 @@ async function updateSpotify() {
         album.style.display = "block";
         album.src = data.albumArt;
         link.href = data.url;
-
-        container.style.backgroundColor = data.vibrantColor;
     } catch (err) {
         console.error(err);
         document.getElementById("spotify-song").innerText = "Error loading music :(";
@@ -47,4 +62,4 @@ async function updateSpotify() {
 }
 
 updateSpotify();
-setInterval(updateSpotify, 3000);
+setInterval(updateSpotify, 1000);
