@@ -21,31 +21,12 @@
                 color: #896583;
             }
 
-            .cornerContainer {
-                position: relative;
-            }
-
-            .corner {
-                position: absolute;
-                width: 150px;
-
-                pointer-events: none;
-            }
-
-            .cornerupleft {
-                top: -15px;
-                left: -15px;
-            }
-
-            .cornerupright {
-                top: -20px;
-                right: -15px;
-            }
-
-            .cornerdownright {
-                bottom: -22px;
-                right: -25px;
-                filter: drop-shadow(-10px -10px 0 #000000);
+            .democontainer {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
             }
 
             .cornerdownleft {
@@ -88,7 +69,7 @@
             <div id="popup-caption" class="caption">cat</div>
         </div>
 
-        <div class="team outline">
+        <div class="team top container">
             <a href="/">
                 <img src="/images/home.png" width="200px">
             </a>
@@ -99,67 +80,36 @@
             <img src="/images/arcade.png">
         </div>
 
-        <h2 class="blink center">my projects</h2>
+        <h2 class="blink center">.  • * •  .</h2>
+
+        <div class="container outline project">
+            <div class="democontainer"><h2>Link Map</h2><p><a href="https://linkmap.sbunger.tech" target="_blank">demo</a></p></div>
+            <h3>Dec. 2025</h3>
+            <p><a href="https://github.com/sbunger/Link-Map">Link Map</a> is a Node web app that uses the OneBusAway API to get real-time arrivals for transit routes in Seattle. I used Leaflet for map rendering, and use GTFS data for stops.</p>
+
+            <div class="img-container">
+                <img class="lightbox" data-caption="Light mode" src="/images/projects/link1.webp">
+                <img class="lightbox" data-caption="Highlight route feature showcased in dark mode" src="/images/projects/link2.webp">
+            </div>
+        </div>
+
+        <img class="center" src="/images/frames/divider1.png">
+
+        <div class="container outline project">
+            <h2>PICat</h2>
+            <h3>Sep. 2025</h3>
+            <p>A <a href="https://github.com/sbunger/PICAT">pico-inspired RP2040 devboard</a>, with 29 GPIO pins. The pin layout is very similar to the Raspberry PI Pico.</p>
+
+            <div class="img-container">
+                <img class="lightbox" data-caption="Custom 'advertisement' for PICat for the Hack Club magazine" src="/images/projects/picat1.webp">
+                <img class="lightbox" data-caption="Boards produced by JLCPCB turned out so cool!" src="/images/projects/picat2.webp">
+            </div>
+        </div>
 
         
 
-        <div class="container outline">
-            <h1>Personal Projects</h1>
-            <p style="padding-right: 60px;">View some of my recent personal projects. These include projects I am working on on and off the internet.</p>
-            <div class="cornerContainer">
-                <img class="corner cornerdownright" src="/images/frames/corner2.png">
-            </div>
-        </div>
-
-        <h2 class="blink-offset center">.  • * •  .</h2>
-
-        <div class="container outline project">
-            <div class="cornerContainer">
-                <img class="corner cornerupright" src="/images/frames/corner3.png">
-            </div>
-
-            <h2>PICat</h2>
-            <h3>Dec. 2025</h3>
-            <p>A <a href="https://github.com/sbunger/PICAT">pico-inspired RP2040 devboard</a>, featuring more GPIO pins, two LEDs, and a sleek design. The pin layout is very similar to the Raspberry PI Pico.</p>
-
-            <div class="img-container">
-                <img data-caption="Custom 'advertisement' for PICat for the Hack Club magazine" src="/images/projects/picat1.webp">
-                <img data-caption="Boards produced by JLCPCB turned out so cool!" src="/images/projects/picat2.webp">
-            </div>
-        </div>
-
-        <img class="center" src="/images/frames/divider1.png">
-
-        <div class="container outline project">
-            <h2>Link Map</h2>
-            <h3>Dec. 2025</h3>
-            <p><a href="https://github.com/sbunger/Link-Map">Link Map</a> is a Node web app that uses the OneBusAway API and SDK for node to get real-time data for bus and train routes in Seattle, Washington. I used Leaflet for map rendering, and currently use GTFS transit data to get route shapes and stop placement.</p>
-
-            <div class="img-container">
-                <img data-caption="Light mode" src="/images/projects/link1.webp">
-                <img data-caption="Highlight route feature showcased in dark mode" src="/images/projects/link2.webp">
-            </div>
-        </div>
-
-        <img class="center" src="/images/frames/divider1.png">
-
-        <div class="container outline project">
-            <h2>Splitboard</h2>
-            <h3>Feb. 2025</h3>
-            <p>A custom split keyboard with 60 keys and an ergonomic design. Made using a grant from the <a href="https://blueprint.hackclub.com/projects/9408">Blueprint</a> program. Currently a work in progress..</p>
-
-            <div class="img-container">
-                <img data-caption="Left side full assembly and soldering completed" src="/images/projects/split1.webp">
-                <img src="/images/projects/split2.webp">
-            </div>
-
-            <div class="cornerContainer">
-                <img class="corner cornerdownleft" src="/images/frames/corner5.png">
-                <img class="corner cornerdownright" src="/images/frames/corner6.png">
-            </div>
-        </div>
-
         <p class="center copywrite">© 2026 Silas Unger</p>
         <script src="/parallax.js"></script>
+        <script src="/lightbox.js"></script>
     </body>
 </html>
