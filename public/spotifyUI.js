@@ -62,4 +62,4 @@ async function updateSpotify() {
 }
 
 updateSpotify();
-setInterval(updateSpotify, 1000);
+setInterval(updateSpotify, 6000);

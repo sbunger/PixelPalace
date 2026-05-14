@@ -57,7 +57,7 @@
                 top: 730px; left: 9%;
             }
 
-            .left-planet-2 img {
+            .left-planet-1 img {
                 animation: spin 45s linear infinite;
             }
 
@@ -65,7 +65,7 @@
                 top: 250px; right: 9%;
             }
 
-            .right-planet-1 img {
+            .right-planet-2 img {
                 animation: spinReverse 60s linear infinite;
             }
 
@@ -73,21 +73,6 @@
                 top: 630px; right: 9%;
             }
 
-            .footer {
-                background-color: #E3D8D8 !important;
-
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                flex-wrap: wrap;
-
-                gap: 5px;
-            }
-
-            footer img {
-                width: 100px;
-            }
 
             #cat1 {
                 position: absolute;
@@ -257,11 +242,11 @@
         <h2 class="blink center">Welcome Home</h2>
 
         <div class="planet-grid">
-            <a href="/arcade/" class="planet-wrap left-planet-2">
+            <a href="/arcade/" class="planet-wrap right-planet-2">
                 <img class="planets" src="/images/planets/neptune.png">
                 <img class="planet-text" src="/images/planets/nep.png">
             </a>
-            <a href="/gallery/" class="planet-wrap left-planet-1">
+            <a href="/gallery/" class="planet-wrap right-planet-1">
                 <img class="planets left-planet-1" src="/images/planets/saturn.png">
                 <img class="planet-text" src="/images/planets/sat.png">
             </a>
@@ -281,17 +266,17 @@
         </div>
 
         <div class="planet-grid">
-            <a href="/photos/" class="planet-wrap right-planet-1">
+            <a href="/photos/" class="planet-wrap left-planet-1">
                 <img class="planets right-planet-1" src="/images/planets/earth.png">
                 <img class="planet-text" src="/images/planets/ear.png">
             </a>
-            <a href="/blog/" class="planet-wrap right-planet-2">
+            <a class="planet-wrap left-planet-2" style="cursor: not-allowed;">
                 <img class="planets right-planet-2" src="/images/planets/jupiter.gif">
                 <img class="planet-text" src="/images/planets/jup.png">
             </a>
         </div>
 
-        <h2 class="center">₊ ⊹ ˖</h2>
+        <img class="center" src="/images/frames/divider1.png">
 
         <div id="spotify-container" class="container outline">
             <div>
@@ -306,17 +291,6 @@
         </div>
         
         <script src="/spotifyUI.js"></script>
-
-        <h2 class="center">. ₊ ⊹ . ˖ .</h2>
-
-        <div class="container outline footer">
-            <img src="/images/banners/256_monitor_button.gif">
-            <img src="/images/banners/acab.gif">
-            <img src="/images/banners/adobe_photo.gif">
-            <img src="/images/banners/nodrugs.gif">
-            <img src="/images/banners/50041.gif">
-            <img src="/images/banners/hackclub.png">
-        </div>
         
 
         <p class="center copywrite">© 2026 Silas Unger</p>

@@ -138,6 +138,24 @@ a {
     margin: 40px;
 }
 
+.footer {
+    margin-top: 40px;
+
+    background-color: #E3D8D8 !important;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 5px;
+}
+
+footer img {
+    width: 100px;
+}
+
 @keyframes blink {
     30% { opacity: 0; }
 }

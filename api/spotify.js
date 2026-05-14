@@ -25,12 +25,20 @@ const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 let lastPlayedSong = null;
 let lastListened = null;
 
+let cachedAccessToken = null;
+let tokenExpiresAt = 0;
+
 async function getAccessToken() {
+    if (cachedAccessToken && Date.now() < tokenExpiresAt) {
+        return cachedAccessToken;
+    }
+
     const response = await fetch("https://accounts.spotify.com/api/token", {
         method: "POST",
         headers: {
-            "Authorization":
-                "Basic " + Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString("base64"),
+            Authorization:
+                "Basic " +
+                Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString("base64"),
             "Content-Type": "application/x-www-form-urlencoded"
         },
         body: new URLSearchParams({
@@ -39,8 +47,20 @@ async function getAccessToken() {
         })
     });
 
+    if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Token refresh failed: ${response.status} ${text}`);
+    }
+
     const data = await response.json();
-    return data.access_token;
+
+    cachedAccessToken = data.access_token;
+
+    tokenExpiresAt = Date.now() + (data.expires_in - 60) * 1000;
+
+    console.log("Fetched new Spotify access token");
+
+    return cachedAccessToken;
 }
 
 function getContrastingTextColor(hex) {
@@ -54,6 +74,8 @@ function getContrastingTextColor(hex) {
 
     return luminance > 0.5 ? "#000000" : "#FFFFFF";
 }
+
+let currentTrackId = null;
 
 async function updateNowPlaying() {
     try {
@@ -69,6 +91,28 @@ async function updateNowPlaying() {
         );
 
         if (response.status === 204 || response.status === 202) {
+            console.log("Nothing playing");
+            return;
+        }
+
+        if (response.status === 429) {
+            const retryAfter = response.headers.get("Retry-After");
+
+            console.log(
+                `Spotify rate limited. Retry after ${retryAfter} seconds`
+            );
+
+            return;
+        }
+
+        if (!response.ok) {
+            const text = await response.text();
+
+            console.error(
+                `Spotify API error ${response.status}:`,
+                text
+            );
+
             return;
         }
 
@@ -76,13 +120,14 @@ async function updateNowPlaying() {
 
         if (!song.item) return;
 
-        const vibrant = new Vibrant.Vibrant(song.item.album.images[0].url);
+        const vibrant = new Vibrant.Vibrant(
+            song.item.album.images[0].url
+        );
+
         const palette = await vibrant.getPalette();
-
-        const darkVibrant = palette.DarkVibrant.hex;
-        const vibrantColor = palette.Vibrant.hex;
-        const muted = palette.Muted.hex;
-
+        const darkVibrant = palette.DarkVibrant?.hex || "#000000";
+        const vibrantColor = palette.Vibrant?.hex || "#ffffff";
+        const muted = palette.Muted?.hex || "#888888";
         const textColor = getContrastingTextColor(vibrantColor);
 
         if (song.is_playing) {
@@ -91,18 +136,28 @@ async function updateNowPlaying() {
 
         lastPlayedSong = {
             isPlaying: song.is_playing,
+
             title: song.item.name,
-            artist: song.item.artists.map(a => a.name).join(", "),
+
+            artist: song.item.artists
+                .map(a => a.name)
+                .join(", "),
+
             albumArt: song.item.album.images[0].url,
+
             elapsed: song.progress_ms,
             duration: song.item.duration_ms,
+
             darkVibrant,
             vibrantColor,
             muted,
             textColor,
+
             url: song.item.external_urls.spotify,
+
             lastListened
         };
+
     } catch (err) {
         console.error("Background update failed:", err);
     }
@@ -123,5 +178,5 @@ app.listen(PORT, () => {
 
   updateNowPlaying();
 
-  setInterval(updateNowPlaying, 3000);
+  setInterval(updateNowPlaying, 6000);
 });
