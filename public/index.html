@@ -239,7 +239,11 @@
 
         <img class="container outline header top" id="logo" src="/images/title.png" width="40%">
 
-        <h2 class="blink center">Welcome Home</h2>
+        <div class="center" style="display: flex; justify-content: center; width: 100%;">
+            <pagering-link style="background-color: black; padding: 4px;" theme="dark"></pagering-link>
+        </div>
+
+
 
         <div class="planet-grid">
             <a href="/arcade/" class="planet-wrap right-planet-2">
@@ -253,7 +257,7 @@
         </div>
 
         <div class="container outline">
-            <h1>Hello, world!</h1>
+            <h1 style="margin-top: 0;">Hello, world!</h1>
             <p>Hi, I'm Silas, and this is my personal site. <span style="color: #3159b0">Click the planets to travel through across my site!</span></p>
 
             <h2>About Me</h2>
@@ -298,5 +302,6 @@
         <img src="/images/cat2.png" width="180px" id="cat2">
         
         <script src="/parallax.js"></script>
+        <script src="https://pagering.gideon.sh/embed.js" defer></script>
     </body>
 </html>
