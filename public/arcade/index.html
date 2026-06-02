@@ -29,6 +29,12 @@
                 justify-content: space-between;
             }
 
+            .demotextcont {
+                display: flex;
+                flex-direction: row;
+                gap: 25px;
+            }
+
             .cornerdownleft {
                 bottom: -20px;
                 left: -20px;
@@ -83,9 +89,15 @@
         <h2 class="blink center">.  • * •  .</h2>
 
         <div class="container outline project">
-            <div class="democontainer"><h2>Link Map</h2><p><a href="https://linkmap.sbunger.tech" target="_blank">demo</a></p></div>
+            <div class="democontainer">
+                <h2>Link Map</h2>
+                <div class="demotextcont">
+                    <p><a href="https://linkmap.sbunger.tech" target="_blank">demo</a></p> 
+                    <p><a href="https://github.com/sbunger/Link-Map" target="_blank">repo</a></p>
+                </div>
+            </div>
             <h3>Dec. 2025</h3>
-            <p><a href="https://github.com/sbunger/Link-Map">Link Map</a> is a Node web app that uses the OneBusAway API to get real-time arrivals for transit routes in Seattle. I used Leaflet for map rendering, and use GTFS data for stops.</p>
+            <p>Link Map is a Node web app that uses the OneBusAway API to get real-time arrivals for transit routes in Seattle. I used Leaflet for map rendering, and use GTFS data for stops.</p>
 
             <div class="img-container">
                 <img class="lightbox" data-caption="Light mode" src="/images/projects/link1.webp">
@@ -96,15 +108,33 @@
         <img class="center" src="/images/frames/divider1.png">
 
         <div class="container outline project">
-            <h2>PICat</h2>
+            <div class="democontainer"><h2>PICat</h2><p><a href="https://github.com/sbunger/PICAT" target="_blank">repo</a></p></div>
             <h3>Sep. 2025</h3>
-            <p>A <a href="https://github.com/sbunger/PICAT">pico-inspired RP2040 devboard</a>, with 29 GPIO pins. The pin layout is very similar to the Raspberry PI Pico.</p>
+            <p>A pico-inspired RP2040 devboard, with 29 GPIO pins. The pin layout is very similar to the Raspberry PI Pico.</p>
 
             <div class="img-container">
                 <img class="lightbox" data-caption="Custom 'advertisement' for PICat for the Hack Club magazine" src="/images/projects/picat1.webp">
                 <img class="lightbox" data-caption="Boards produced by JLCPCB turned out so cool!" src="/images/projects/picat2.webp">
             </div>
         </div>
+
+        <img class="center" src="/images/frames/divider1.png">
+
+        <div class="container outline project">
+            <div class="democontainer"><h2>Mini Synth</h2>
+                <div class="demotextcont">
+                    <p><a href="https://sequencer.sbunger.tech" target="_blank">demo</a></p> 
+                    <p><a href="https://github.com/sbunger/Mini-Studio" target="_blank">repo</a></p>
+                </div>
+            </div>
+            <h3>Dec. 2025</h3>
+            <p>Mini Studio is a very simple and easy-to-use browser-based drum sequencer with per-track instruments, volume, and effects.</p>
+
+            <div class="img-container">
+                <img class="lightbox" data-caption="Synthesizer with effects panel open" src="/images/projects/synth1.webp">
+            </div>
+        </div>
+        
 
         <div class="container outline footer">
             <img src="/images/banners/256_monitor_button.gif">

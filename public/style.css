@@ -208,6 +208,9 @@ footer img {
     backdrop-filter: blur(2px);
 }
 
+#popup-caption {
+    color: #fff;
+}
 
 .popup img {
     max-height: 75%;

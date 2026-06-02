@@ -92,6 +92,9 @@ async function updateNowPlaying() {
 
         if (response.status === 204 || response.status === 202) {
             console.log("Nothing playing");
+            if (lastPlayedSong) {
+                lastPlayedSong.isPlaying = false;
+            }
             return;
         }
 
