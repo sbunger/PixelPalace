@@ -15,12 +15,6 @@
         <link rel="stylesheet" href="/style.css">
 
         <style>
-            .hackclub {
-                position: absolute;
-                left: 100px;
-                top: 20px;
-            }
-
             .planet-wrap {
                 width: 200px;
                 position: absolute;
@@ -41,12 +35,21 @@
             .planet-text {
                 position: absolute;
                 width: 100%;
-                transform: scale(1.43) !important;
+                transform: scale(1.5) !important;
                 pointer-events: none;
             }
 
             .planet-wrap:hover {
                 transform: scale(1.1);
+            }
+
+            .planet-wrap.disabled {
+                cursor: not-allowed;
+            }
+
+            .planet-wrap.disabled:hover {
+                cursor: not-allowed;
+                transform: scale(1.05);
             }
 
             .left-planet-1 {
@@ -76,14 +79,14 @@
 
             #cat1 {
                 position: absolute;
-                left: 40px;
-                transform: translate(0, -125px);
+                left: 28%;
+                transform: translate(0, -340px);
             }
 
             #cat2 {
                 position: absolute;
-                right: 40px;
-                transform: translate(0, -130px);
+                right: 25%;
+                transform: translate(0, -348px);
             }
 
             .icon {
@@ -101,53 +104,6 @@
 
                 gap: 12px;
             }
-
-            .team {
-                overflow: hidden;
-            }
-
-            .team-track {
-                display: flex;
-                width: max-content;
-
-                white-space: nowrap;
-                
-                will-change: transform;
-                gap: 70px;
-            }
-
-            .team-track h2 {
-                color: #896583;
-
-                font-size: 30px;
-                transform: translateY(-2.5px);
-
-                text-align: center;
-            }
-
-            .time {
-                width: 120px;
-                color: #000 !important;
-            }
-
-            .date {
-                width: 120px;
-                color: #3159b0 !important;
-            }
-
-            .weather {
-                width: 320px;
-            }
-
-            .scroll {
-                animation: loop 40s linear infinite;
-            }
-
-            .scroll.scroll2 {
-                transform: translateX(100%);
-                animation-delay: 20s;
-            }
-
 
 
             #spotify-container {
@@ -192,6 +148,13 @@
                 margin-top: 8px;
                 margin-bottom: 4px;
                 font-size: 35px;
+            }
+
+            .frame {
+                position: absolute;
+                width: 120px;
+                top: 15px;
+                right: 15px;
             }
 
             @keyframes loop {
@@ -250,15 +213,15 @@
                 <img class="planets" src="/images/planets/neptune.png">
                 <img class="planet-text" src="/images/planets/nep.png">
             </a>
-            <a href="/gallery/" class="planet-wrap right-planet-1">
+            <a class="planet-wrap right-planet-1 disabled">
                 <img class="planets left-planet-1" src="/images/planets/saturn.png">
-                <img class="planet-text" src="/images/planets/sat.png">
             </a>
         </div>
 
-        <div class="container outline">
+        <div class="container outline" style="position: relative;">
+            <img src="images/frames/corner3.png" class="frame">
             <h1 style="margin-top: 0;">Hello, world!</h1>
-            <p>Hi, I'm Silas, and this is my personal site. <span style="color: #3159b0">Click the planets to travel through across my site!</span></p>
+            <p>Hi, I'm Silas, and this is my personal site. <span style="color: #3159b0">Click the blue planets to travel through across my site!</span></p>
 
             <h2>About Me</h2>
             <p>I am 17 and I live in Seattle, Washington. I love music (my guitar and violin), art, coding, and the outdoors! I am also interested in botany and environmental sciences.</p>
@@ -272,11 +235,10 @@
         <div class="planet-grid">
             <a href="/photos/" class="planet-wrap left-planet-1">
                 <img class="planets right-planet-1" src="/images/planets/earth.png">
-                <img class="planet-text" src="/images/planets/ear.png">
+                <img class="planet-text" src="/images/planets/ear.png"">
             </a>
-            <a class="planet-wrap left-planet-2" style="cursor: not-allowed;">
+            <a class="planet-wrap left-planet-2 disabled">
                 <img class="planets right-planet-2" src="/images/planets/jupiter.gif">
-                <img class="planet-text" src="/images/planets/jup.png">
             </a>
         </div>
 
@@ -295,7 +257,6 @@
         </div>
         
         <script src="/spotifyUI.js"></script>
-        
 
         <p class="center copywrite">© 2026 Silas Unger</p>
         <img src="/images/cat.png" width="200px" id="cat1">
