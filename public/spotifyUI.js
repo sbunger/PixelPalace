@@ -44,8 +44,6 @@ async function updateSpotify() {
             ? "Listening Now"
             : `Last listened ${timeAgo(data.lastListened)}`;
 
-        container.style.filter = data.isPlaying ? "brightness(1)" : "brightness(0.9)";
-
         song.innerHTML = `
             <h2>${data.title} ${data.isPlaying ? '<span class="blink">•</span>' : ''}</h2>
             <p>${data.artist} • ${formatTime(data.elapsed)} / ${formatTime(data.duration)}</p>
