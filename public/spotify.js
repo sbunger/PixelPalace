@@ -48,11 +48,6 @@ function displaySong(song) {
             "spotify-album"
         );
 
-    const link =
-        document.getElementById(
-            "spotify-link"
-        );
-
 
     artist.textContent =
         song.artist;

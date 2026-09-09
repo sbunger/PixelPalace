@@ -1,397 +1,229 @@
-const searchForm =
-    document.getElementById("search-form");
+const searchForm = document.getElementById("search-form");
+const artistInput = document.getElementById("artist-input");
+const songInput = document.getElementById("song-input");
+const resultsContainer = document.getElementById("results");
+const status = document.getElementById("status");
 
-const searchInput =
-    document.getElementById("search-input");
-
-const resultsContainer =
-    document.getElementById("results");
-
-const status =
-    document.getElementById("status");
-
-
-// --------------------------------------------------
 // Load current song
-// --------------------------------------------------
 
 async function loadCurrentSong() {
+    try {
+        const response = await fetch("/api/song");
+
+        if (!response.ok) {
+            throw new Error("Could not load current song.");
+        }
+
+        const song = await response.json();
+
+        displayCurrentSong(song);
+    } catch (error) {
+        console.error(error);
+
+        status.textContent = error.message;
+        status.style.display = "block";
+    }
+}
+
+// Display current song
+
+function displayCurrentSong(song) {
+    document.getElementById("current-artist").textContent =
+        song.artist || "Artist";
+
+    document.getElementById("current-title").textContent =
+        song.title || "Song";
+
+    document.getElementById("current-album").textContent =
+        song.album || "Album";
+
+    const image = document.getElementById("current-image");
+
+    if (song.image) {
+        image.src = song.image;
+        image.style.display = "block";
+    } else {
+        image.style.display = "none";
+    }
+}
+
+// Search MusicBrainz
+
+searchForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const artist = artistInput.value.trim();
+    const song = songInput.value.trim();
+
+    if (!artist && !song) {
+        return;
+    }
+
+    status.textContent = "Searching...";
+    status.style.display = "block";
+
+    resultsContainer.innerHTML = "";
 
     try {
+        const params = new URLSearchParams();
 
-        const response =
-            await fetch("/api/song");
+        if (artist) {
+            params.set("artist", artist);
+        }
+
+        if (song) {
+            params.set("song", song);
+        }
+
+        const response = await fetch(
+            `/api/search?${params.toString()}`
+        );
+
+        const data = await response.json();
 
         if (!response.ok) {
             throw new Error(
-                "Could not load current song."
+                data.error || "Search failed."
             );
         }
 
-        const song =
-            await response.json();
+        if (!data.results || data.results.length === 0) {
+            status.textContent = "No results found.";
+            status.style.display = "block";
 
-        displayCurrentSong(song);
-
-    } catch (error) {
-
-        console.error(error);
-
-        status.textContent =
-            error.message;
-
-        status.style.display = "block";
-    }
-}
-
-
-// --------------------------------------------------
-// Display current song
-// --------------------------------------------------
-
-function displayCurrentSong(song) {
-
-    document.getElementById(
-        "current-artist"
-    ).textContent =
-        song.artist || "Artist";
-
-
-    document.getElementById(
-        "current-title"
-    ).textContent =
-        song.title || "Song";
-
-
-    document.getElementById(
-        "current-album"
-    ).textContent =
-        song.album || "Album";
-
-
-    const image =
-        document.getElementById(
-            "current-image"
-        );
-
-
-    if (song.image) {
-
-        image.src =
-            song.image;
-
-        image.style.display =
-            "block";
-
-    } else {
-
-        image.style.display =
-            "none";
-    }
-}
-
-
-// --------------------------------------------------
-// Search MusicBrainz
-// --------------------------------------------------
-
-searchForm.addEventListener(
-    "submit",
-    async (event) => {
-
-        event.preventDefault();
-
-
-        const query =
-            searchInput.value.trim();
-
-
-        if (!query) {
             return;
         }
 
-
         status.textContent =
-            "Searching...";
+            `${data.results.length} results found.`;
 
         status.style.display = "block";
 
+        displayResults(data.results);
+    } catch (error) {
+        console.error(error);
 
-        resultsContainer.innerHTML =
-            "";
-
-
-        try {
-
-            const response =
-                await fetch(
-                    `/api/search?q=${encodeURIComponent(query)}`
-                );
-
-
-            const data =
-                await response.json();
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    data.error ||
-                    "Search failed."
-                );
-            }
-
-
-            if (
-                !data.results ||
-                data.results.length === 0
-            ) {
-
-                status.textContent =
-                    "No results found.";
-                status.style.display = "block";
-
-                return;
-            }
-
-
-            status.textContent =
-                `${data.results.length} results found.`;
-            status.style.display = "block";
-
-
-            displayResults(
-                data.results
-            );
-
-
-        } catch (error) {
-
-            console.error(error);
-
-            status.textContent =
-                error.message;
-            status.style.display = "block";
-        }
+        status.textContent = error.message;
+        status.style.display = "block";
     }
-);
+});
 
-
-// --------------------------------------------------
 // Display search results
-// --------------------------------------------------
 
 function displayResults(results) {
-
-    resultsContainer.innerHTML =
-        "";
-
+    resultsContainer.innerHTML = "";
 
     results.forEach((song) => {
+        const result = document.createElement("div");
 
-        const result =
-            document.createElement("div");
+        result.className = "result";
 
-        result.className =
-            "result";
+        const image = document.createElement("img");
 
+        image.src = song.image;
+        image.alt = `${song.album} album artwork`;
 
-        const image =
-            document.createElement("img");
-
-        image.src =
-            song.image;
-
-        image.alt =
-            `${song.album} album artwork`;
-
-
-        /*
-         * If Cover Art Archive doesn't have artwork,
-         * don't show a broken image.
-         */
         image.onerror = () => {
-
-            image.style.display =
-                "none";
+            image.style.display = "none";
         };
 
+        const info = document.createElement("div");
 
-        const info =
-            document.createElement("div");
+        info.className = "result-info";
 
-        info.className =
-            "result-info";
+        const title = document.createElement("h2");
 
+        title.textContent = song.title;
 
-        const title =
-            document.createElement("h2");
+        const artist = document.createElement("p");
 
-        title.textContent =
-            song.title;
+        artist.textContent = song.artist;
 
+        const album = document.createElement("p");
 
-        const artist =
-            document.createElement("p");
+        album.textContent = song.album;
 
-        artist.textContent =
-            song.artist;
-
-
-        const album =
-            document.createElement("p");
-
-        album.textContent =
-            song.album;
-
-
-        if (song.date) {
-
-            const date =
-                document.createElement("p");
-
-            date.textContent =
-                song.date;
-
-            info.appendChild(
-                date
-            );
-        }
-
-
-        info.prepend(
+        info.append(
             title,
             artist,
             album
         );
 
+        if (song.date) {
+            const date = document.createElement("p");
 
-        const button =
-            document.createElement("button");
+            date.textContent = song.date;
 
-        button.textContent =
-            "SELECT";
+            info.appendChild(date);
+        }
 
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.textContent = "SELECT";
 
         button.addEventListener(
             "click",
             () => selectSong(song)
         );
 
+        result.appendChild(image);
+        result.appendChild(info);
+        result.appendChild(button);
 
-        result.appendChild(
-            image
-        );
-
-        result.appendChild(
-            info
-        );
-
-        result.appendChild(
-            button
-        );
-
-
-        resultsContainer.appendChild(
-            result
-        );
+        resultsContainer.appendChild(result);
     });
 }
 
-
-// --------------------------------------------------
 // Select song
-// --------------------------------------------------
 
 async function selectSong(song) {
-
-    status.textContent =
-        "Updating...";
-
+    status.textContent = "Updating...";
     status.style.display = "block";
 
     try {
+        const response = await fetch(
+            "/api/song",
+            {
+                method: "POST",
 
-        const response =
-            await fetch(
-                "/api/song",
-                {
-                    method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
+                body: JSON.stringify({
+                    artist: song.artist,
+                    title: song.title,
+                    album: song.album,
+                    image: song.image,
+                    url: song.musicbrainzUrl
+                })
+            }
+        );
 
-                    body: JSON.stringify({
-
-                        artist:
-                            song.artist,
-
-                        title:
-                            song.title,
-
-                        album:
-                            song.album,
-
-                        image:
-                            song.image,
-
-                        /*
-                         * MusicBrainz page is useful
-                         * as a fallback link.
-                         */
-                        url:
-                            song.musicbrainzUrl
-                    })
-                }
-            );
-
-
-        const data =
-            await response.json();
-
+        const data = await response.json();
 
         if (!response.ok) {
-
             throw new Error(
                 data.error ||
                 "Could not update song."
             );
         }
 
+        displayCurrentSong(data.song);
 
-        displayCurrentSong(
-            data.song
-        );
-
-
-        status.textContent =
-            "Song updated!";
-        
+        status.textContent = "Song updated!";
         status.style.display = "block";
 
-        /*
-         * Remove search results after selection.
-         */
-        resultsContainer.innerHTML =
-            "";
-
-
+        resultsContainer.innerHTML = "";
     } catch (error) {
-
         console.error(error);
 
-        status.textContent =
-            error.message;
-
+        status.textContent = error.message;
         status.style.display = "block";
     }
 }
 
-
-// --------------------------------------------------
 // Initial load
-// --------------------------------------------------
 
 loadCurrentSong();

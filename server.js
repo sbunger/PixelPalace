@@ -22,7 +22,7 @@ const SONG_FILE = path.join(DATA_DIR, "current-song.json");
 const MUSICBRAINZ_URL = "https://musicbrainz.org/ws/2";
 
 const MUSICBRAINZ_USER_AGENT =
-    "SilasUngerWebsite/1.0 (https://yourdomain.com)";
+    "SilasUngerWebsite/1.0 (https://sbunger.tech/)";
 
 // --------------------------------------------------
 // Middleware
@@ -77,7 +77,6 @@ async function getCurrentSong() {
     return JSON.parse(data);
 }
 
-
 async function setCurrentSong(song) {
     await fs.writeFile(
         SONG_FILE,
@@ -85,6 +84,16 @@ async function setCurrentSong(song) {
     );
 }
 
+// --------------------------------------------------
+// Escape MusicBrainz/Lucene query
+// --------------------------------------------------
+
+function escapeLucene(value) {
+    return value.replace(
+        /([+\-!(){}\[\]^"~*?:\\/])/g,
+        "\\$1"
+    );
+}
 
 // --------------------------------------------------
 // GET current song
@@ -104,20 +113,41 @@ app.get("/api/song", async (req, res) => {
     }
 });
 
-
 // --------------------------------------------------
 // Search MusicBrainz
 // --------------------------------------------------
 
 app.get("/api/search", async (req, res) => {
     try {
-        const query = req.query.q?.trim();
+        const artist =
+            req.query.artist?.trim() || "";
 
-        if (!query) {
+        const song =
+            req.query.song?.trim() || "";
+
+        if (!artist && !song) {
             return res.status(400).json({
-                error: "Search query is required."
+                error:
+                    "Artist or song is required."
             });
         }
+
+        const queryParts = [];
+
+        if (artist) {
+            queryParts.push(
+                `artist:"${escapeLucene(artist)}"`
+            );
+        }
+
+        if (song) {
+            queryParts.push(
+                `recording:"${escapeLucene(song)}"`
+            );
+        }
+
+        const query =
+            queryParts.join(" AND ");
 
         const url = new URL(
             `${MUSICBRAINZ_URL}/recording`
@@ -135,7 +165,7 @@ app.get("/api/search", async (req, res) => {
 
         url.searchParams.set(
             "limit",
-            "10"
+            "20"
         );
 
         url.searchParams.set(
@@ -149,6 +179,7 @@ app.get("/api/search", async (req, res) => {
                 headers: {
                     "User-Agent":
                         MUSICBRAINZ_USER_AGENT,
+
                     "Accept":
                         "application/json"
                 }
@@ -161,17 +192,23 @@ app.get("/api/search", async (req, res) => {
             );
         }
 
-        const data = await response.json();
+        const data =
+            await response.json();
 
         const results = [];
 
-        for (const recording of data.recordings || []) {
+        for (
+            const recording of
+            data.recordings || []
+        ) {
+
             const artists =
                 recording["artist-credit"] || [];
 
-            const artist =
+            const artistName =
                 artists
                     .map((credit) => {
+
                         if (
                             typeof credit === "string"
                         ) {
@@ -189,14 +226,14 @@ app.get("/api/search", async (req, res) => {
             const releases =
                 recording.releases || [];
 
-            /*
-             * Prefer an album release when possible.
-             */
             const release =
                 releases.find(
-                    (r) =>
-                        r["release-group"]?.["primary-type"] ===
-                        "Album"
+                    (release) =>
+                        release[
+                            "release-group"
+                        ]?.[
+                            "primary-type"
+                        ] === "Album"
                 ) ||
                 releases[0];
 
@@ -207,12 +244,6 @@ app.get("/api/search", async (req, res) => {
             const releaseId =
                 release.id;
 
-            /*
-             * Cover Art Archive thumbnail.
-             *
-             * 500px is a good size for the admin
-             * search results.
-             */
             const image =
                 `https://coverartarchive.org/release/${releaseId}/front-500`;
 
@@ -225,14 +256,14 @@ app.get("/api/search", async (req, res) => {
                 title:
                     recording.title,
 
-                artist,
+                artist:
+                    artistName,
 
                 album:
                     release.title,
 
                 date:
-                    release.date ||
-                    "",
+                    release.date || "",
 
                 image,
 
@@ -246,6 +277,7 @@ app.get("/api/search", async (req, res) => {
         });
 
     } catch (error) {
+
         console.error(
             "MusicBrainz search error:",
             error
@@ -258,13 +290,13 @@ app.get("/api/search", async (req, res) => {
     }
 });
 
-
 // --------------------------------------------------
 // Set current song
 // --------------------------------------------------
 
 app.post("/api/song", async (req, res) => {
     try {
+
         const {
             artist,
             title,
@@ -310,6 +342,7 @@ app.post("/api/song", async (req, res) => {
         });
 
     } catch (error) {
+
         console.error(
             "Could not save song:",
             error
@@ -321,7 +354,6 @@ app.post("/api/song", async (req, res) => {
         });
     }
 });
-
 
 // --------------------------------------------------
 // Admin page
@@ -338,24 +370,29 @@ app.get("/admin", (req, res) => {
     );
 });
 
-
 // --------------------------------------------------
 // Start server
 // --------------------------------------------------
 
 initializeData()
     .then(() => {
-        app.listen(PORT, () => {
-            console.log(
-                `Server running at http://localhost:${PORT}`
-            );
 
-            console.log(
-                `Admin page: http://localhost:${PORT}/admin/`
-            );
-        });
+        app.listen(
+            PORT,
+            () => {
+
+                console.log(
+                    `Server running at http://localhost:${PORT}`
+                );
+
+                console.log(
+                    `Admin page: http://localhost:${PORT}/admin/`
+                );
+            }
+        );
     })
     .catch((error) => {
+
         console.error(
             "Failed to initialize server:",
             error

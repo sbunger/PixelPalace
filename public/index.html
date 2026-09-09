@@ -122,23 +122,49 @@
             }
 
 
-            #spotify-container img {
+            #album-container {
                 width: 100px;
-                image-rendering: auto;
+                height: 100px;
+                position: relative;
 
                 transition: all .2s;
+
+                transform: scale(1.1);
+                flex-shrink: 0;
             }
 
-            #spotify-container img:hover {
-                transform: scale(1.05);
+            #spotify-container img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50px;
+
+                image-rendering: auto;
+                animation: spin 20s linear infinite;
             }
 
-            #spotify-song {
-                transition: color 1s;
+            #spotify-album-center {
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                background-color: black;
+
+                z-index: 1;
+            }
+
+            #album-container:hover {
+                transform: scale(1.15);
             }
 
             #now-playing {
                 color: #3159b0;
+                font-size: 18px !important;
+                margin: 0;
+                letter-spacing: 1px;
+                text-transform: uppercase;
             }
 
             #spotify-container p {
@@ -159,11 +185,6 @@
                 width: 120px;
                 top: 15px;
                 right: 15px;
-            }
-
-            @keyframes loop {
-                0% {transform: translateX(100%);}
-                100% {transform: translateX(-100%);}
             }
 
             @media only screen and (max-width: 600px) {
@@ -260,7 +281,10 @@
                     <p>Album</p>
                 </div>
             </div>
-            <a id="spotify-link" target="_blank"><img src="https://f4.bcbits.com/img/a1829975877_10.jpg" id="spotify-album"></a>
+            <div id="album-container">
+                <div id="spotify-album-center"></div>
+                <img id="spotify-album">
+            </div>
         </div>
 
         <p class="center copywrite">© 2026 Silas Unger</p>
