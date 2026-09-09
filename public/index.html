@@ -137,6 +137,10 @@
                 transition: color 1s;
             }
 
+            #now-playing {
+                color: #3159b0;
+            }
+
             #spotify-container p {
                 font-size: 20px;
                 margin: 0;
@@ -250,21 +254,19 @@
 
         <div id="spotify-container" class="container outline">
             <div>
-            <p id="now-playing">
-                Listening Now:
-            </p>
-            <div id="spotify-song">
-                Loading Spotify...
+                <p id="now-playing">Artist</p>
+                <div id="spotify-song">
+                    <h2>Song</h2>
+                    <p>Album</p>
+                </div>
             </div>
-            </div>
-            <a id="spotify-link" target="_blank"><img id="spotify-album"></a>
+            <a id="spotify-link" target="_blank"><img src="https://f4.bcbits.com/img/a1829975877_10.jpg" id="spotify-album"></a>
         </div>
-        
-        <script src="/spotifyUI.js"></script>
 
         <p class="center copywrite">© 2026 Silas Unger</p>
         
         <script src="/parallax.js"></script>
+        <script src="/spotify.js"></script>
         <script src="https://pagering.gideon.sh/embed.js" defer></script>
     </body>
 </html>

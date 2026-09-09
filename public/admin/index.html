@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Silas Unger</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jacquard+24&family=Jersey+10&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+
+
+<style>
+    .admin-container {
+        position: relative;
+    }
+
+    .admin-header h1 {
+        margin: 15px 0;
+        margin-top: 0;
+    }
+
+    .section-title {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .section-title h2 {
+        margin: 0;
+    }
+
+    .current-song {
+        padding-bottom: 35px;
+        border-bottom: 2px solid white;
+    }
+
+    .current-song-content {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .current-song img {
+        width: 160px;
+        height: 160px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 2px solid white;
+    }
+
+    #current-artist {
+        margin: 0;
+        color: #3159b0;
+        font-size: 20px;
+    }
+
+    #current-title {
+        margin: 0;
+        font-size: 36px;
+    }
+
+    #current-album {
+        margin: 0;
+        font-size: 20px;
+    }
+
+    .search-form {
+        display: flex;
+        gap: 8px;
+    }
+
+    .search-form input {
+        flex: 1;
+        min-width: 0;
+        box-sizing: border-box;
+        padding: 8px 12px;
+        font-family: "Jersey 10", sans-serif;
+        font-size: 22px;
+        background: black;
+        color: white;
+        border: 2px solid white;
+        outline: none;
+    }
+
+    .search-form input::placeholder {
+        color: #777;
+    }
+
+    button {
+        font-family: "Jersey 10", sans-serif;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .search-form button {
+        padding: 8px 18px;
+        background: white;
+        color: black;
+        border: 2px solid white;
+    }
+
+    .search-form button:hover {
+        background: #3159b0;
+        color: white;
+        border-color: #3159b0;
+    }
+
+    #status {
+        display: none;
+        min-height: 0;
+        color: #3159b0;
+
+        margin-top: 20px;
+    }
+
+    #results {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .result {
+        margin-top: 7px;
+
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 10px;
+        border: 2px solid white;
+        transition: transform 0.1s, border-color 0.1s;
+    }
+
+    .result:hover {
+        border-color: #3159b0;
+    }
+
+    .result img {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 1px solid white;
+    }
+
+    .result-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .result-info h2 {
+        margin: 0 0 2px;
+        font-size: 27px;
+        line-height: 1;
+    }
+
+    .result-info p {
+        margin: 2px 0;
+        font-size: 18px;
+        line-height: 1.1;
+    }
+
+    .result-info p:nth-child(2) {
+        color: #3159b0;
+    }
+
+    .result button {
+        flex-shrink: 0;
+        padding: 7px 13px;
+        background: black;
+        color: white;
+        border: 2px solid white;
+    }
+
+    .result button:hover {
+        background: white;
+        color: black;
+    }
+
+    .frame {
+        position: absolute;
+        width: 100px;
+        top: 15px;
+        right: 15px;
+        pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+        .frame {
+            display: none;
+        }
+
+        .current-song-content {
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .current-song img {
+            width: 110px;
+            height: 110px;
+        }
+
+        #current-title {
+            font-size: 28px;
+        }
+
+        #current-artist,
+        #current-album {
+            font-size: 17px;
+        }
+
+        .search-form {
+            flex-direction: row;
+        }
+
+        .search-form button {
+            padding: 8px 12px;
+        }
+
+        .result {
+            align-items: flex-start;
+        }
+
+        .result img {
+            width: 75px;
+            height: 75px;
+        }
+
+        .result-info h2 {
+            font-size: 23px;
+        }
+
+        .result-info p {
+            font-size: 16px;
+        }
+
+        .result button {
+            align-self: center;
+            padding: 6px 9px;
+            font-size: 17px;
+        }
+    }
+</style>
+
+
+</head>
+
+<body>
+
+    <div class="team top container">
+        <a href="/">
+            <img src="/images/home.png" width="200px">
+        </a>
+    </div>
+
+    <div class="container outline admin-container">
+        <img src="/images/frames/corner3.png" class="frame" alt="">
+
+    <div class="admin-header">
+        <h1>Music</h1>
+    </div>
+
+    <section class="current-song">
+        <div class="section-title">
+            <h2>Currently Selected</h2>
+        </div>
+
+        <div class="current-song-content">
+            <img id="current-image" src="" alt="Current album artwork">
+
+            <div class="current-song-info">
+                <p id="current-artist">Artist</p>
+                <h2 id="current-title">Song</h2>
+                <p id="current-album">Album</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-title">
+            <h2>Select a song</h2>
+        </div>
+
+        <form id="search-form" class="search-form">
+            <input type="text" id="search-input" placeholder="artist / song..." autocomplete="off" required>
+            <button type="submit">SEARCH</button>
+        </form>
+
+        <p id="status"></p>
+        <div id="results"></div>
+    </section>
+</div>
+
+<p class="center copywrite">© 2026 Silas Unger</p>
+
+<script src="/admin/admin.js"></script>
+
+
+</body>
+</html>
