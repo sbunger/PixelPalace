@@ -60,3 +60,7 @@ temp/
 .yarn/unplugged/
 .yarn/build-state.yml
 .yarn/install-state.gz
+
+# Data
+data/*.json
+public/images/projects/

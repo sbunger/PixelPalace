@@ -6,18 +6,29 @@ const leftArrow = document.querySelector(".arrow.left");
 const rightArrow = document.querySelector(".arrow.right");
 
 let currentImageIndex = 0;
-// Cache all images on page load
-const images = Array.from(document.querySelectorAll(".lightbox"));
+let images = [];
 
-// Show the image at a given index
+function updateLightbox() {
+    images = Array.from(document.querySelectorAll(".lightbox"));
+
+    images.forEach((img, index) => {
+        img.onclick = () => {
+            showImage(index);
+            popup.classList.add("shown");
+        };
+    });
+}
+
 function showImage(index) {
     const img = images[index];
-    if (!img) return; // safety check
+
+    if (!img) return;
 
     popupImg.src = img.src;
+
     if (img.dataset.caption) {
         popupCaption.style.display = "block";
-        popupCaption.innerHTML = img.dataset.caption;
+        popupCaption.textContent = img.dataset.caption;
     } else {
         popupCaption.style.display = "none";
     }
@@ -25,41 +36,45 @@ function showImage(index) {
     currentImageIndex = index;
 }
 
-// Open popup on image click
-images.forEach((img, index) => {
-    img.addEventListener("click", () => {
-        showImage(index);
-        popup.classList.add("shown");
-    });
-});
-
-// Arrows
 rightArrow.addEventListener("click", (e) => {
     e.stopPropagation();
+
     if (!images.length) return;
-    currentImageIndex = (currentImageIndex + 1) % images.length;
-    showImage(currentImageIndex);
+
+    showImage((currentImageIndex + 1) % images.length);
 });
 
 leftArrow.addEventListener("click", (e) => {
     e.stopPropagation();
+
     if (!images.length) return;
-    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-    showImage(currentImageIndex);
+
+    showImage((currentImageIndex - 1 + images.length) % images.length);
 });
 
-// Close popup
-closeBtn.addEventListener("click", () => popup.classList.remove("shown"));
-popup.addEventListener("click", e => {
-    if (e.target === popup) popup.classList.remove("shown");
+closeBtn.addEventListener("click", () => {
+    popup.classList.remove("shown");
 });
 
-// Keyboard navigation
+popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+        popup.classList.remove("shown");
+    }
+});
+
 document.addEventListener("keydown", (e) => {
     if (!popup.classList.contains("shown")) return;
     if (!images.length) return;
 
-    if (e.key === "ArrowRight") showImage((currentImageIndex + 1) % images.length);
-    if (e.key === "ArrowLeft") showImage((currentImageIndex - 1 + images.length) % images.length);
-    if (e.key === "Escape") popup.classList.remove("shown");
+    if (e.key === "ArrowRight") {
+        showImage((currentImageIndex + 1) % images.length);
+    }
+
+    if (e.key === "ArrowLeft") {
+        showImage((currentImageIndex - 1 + images.length) % images.length);
+    }
+
+    if (e.key === "Escape") {
+        popup.classList.remove("shown");
+    }
 });

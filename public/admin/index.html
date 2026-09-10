@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Jacquard+24&family=Jersey+10&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
 
-
 <style>
     .admin-container {
         position: relative;
@@ -32,11 +31,6 @@
 
     .section-title h2 {
         margin: 0;
-    }
-
-    .current-song {
-        padding-bottom: 35px;
-        border-bottom: 2px solid white;
     }
 
     .current-song-content {
@@ -69,54 +63,55 @@
         font-size: 20px;
     }
 
-.search-form {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
-}
+    .search-form {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
 
-.search-form input {
-    flex: 1;
-    min-width: 0;
-    box-sizing: border-box;
-    padding: 8px 12px;
-    font-family: "Jersey 10", sans-serif;
-    font-size: 22px;
-    background: black;
-    color: white;
-    border: 2px solid white;
-    outline: none;
-}
+    .search-form input {
+        flex: 1;
+        min-width: 0;
+        box-sizing: border-box;
+        padding: 8px 12px;
+        font-family: "Jersey 10", sans-serif;
+        font-size: 22px;
+        background: black;
+        color: white;
+        border: 2px solid white;
+        outline: none;
+    }
 
-.search-form input:focus {
-    border-color: #3159b0;
-}
+    .search-form input:focus {
+        border-color: #3159b0;
+    }
 
-.search-form input::placeholder {
-    color: #777;
-}
+    .search-form input::placeholder {
+        color: #777;
+    }
 
-.search-form button {
-    padding: 8px 18px;
-    font-family: "Jersey 10", sans-serif;
-    font-size: 20px;
-    background: white;
-    color: black;
-    border: 2px solid white;
-    cursor: pointer;
-}
+    .search-form button,
+    .project-form button {
+        padding: 8px 18px;
+        font-family: "Jersey 10", sans-serif;
+        font-size: 20px;
+        background: white;
+        color: black;
+        border: 2px solid white;
+        cursor: pointer;
+    }
 
-.search-form button:hover {
-    background: #3159b0;
-    color: white;
-    border-color: #3159b0;
-}
+    .search-form button:hover,
+    .project-form button:hover {
+        background: #3159b0;
+        color: white;
+        border-color: #3159b0;
+    }
 
     #status {
         display: none;
         min-height: 0;
         color: #3159b0;
-
         margin-top: 20px;
     }
 
@@ -128,7 +123,6 @@
 
     .result {
         margin-top: 7px;
-
         display: flex;
         align-items: center;
         gap: 15px;
@@ -178,9 +172,147 @@
         background: black;
         color: white;
         border: 2px solid white;
+        cursor: pointer;
     }
 
     .result button:hover {
+        background: white;
+        color: black;
+    }
+
+    .projects-admin {
+        margin-top: 15px;
+        padding-top: 35px;
+        border-top: 2px solid white;
+    }
+
+    .project-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .project-form input,
+    .project-form textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px 12px;
+        font-family: "Jersey 10", sans-serif;
+        font-size: 20px;
+        background: black;
+        color: white;
+        border: 2px solid white;
+        outline: none;
+    }
+
+    .project-form textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .project-form input:focus,
+    .project-form textarea:focus {
+        border-color: #3159b0;
+    }
+
+    .project-form input::placeholder,
+    .project-form textarea::placeholder {
+        color: #777;
+    }
+
+    .admin-subsection {
+        margin-top: 25px;
+        text-align: left !important;
+    }
+
+    .admin-subsection h3 {
+        color: #3159b0;
+        margin-bottom: 10px;
+    }
+
+    .dynamic-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .dynamic-row input {
+        flex: 1;
+    }
+
+    .dynamic-row button {
+        width: 45px;
+        padding: 0;
+        background: black;
+        color: white;
+        border: 2px solid white;
+        cursor: pointer;
+        font-family: "Jersey 10", sans-serif;
+        font-size: 20px;
+    }
+
+    .dynamic-row button:hover {
+        background: #3159b0;
+        border-color: #3159b0;
+    }
+
+    #project-status {
+        display: none;
+        color: #3159b0;
+        margin: 15px 0 0;
+    }
+
+    #project-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .admin-project {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 12px;
+        border: 2px solid white;
+    }
+
+    .admin-project:hover {
+        border-color: #3159b0;
+    }
+
+    .admin-project-info {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .admin-project-info h2 {
+        margin: 0;
+        font-size: 25px;
+    }
+
+    .admin-project-info p {
+        margin: 2px 0 0;
+        color: #3159b0;
+        font-size: 17px;
+    }
+
+    .project-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .project-actions button {
+        font-family: "Jersey 10", sans-serif;
+        font-size: 16px;
+        padding: 7px 12px;
+        background: black;
+        color: white;
+        border: 2px solid white;
+        cursor: pointer;
+    }
+
+    .project-actions button:hover {
         background: white;
         color: black;
     }
@@ -192,6 +324,140 @@
         right: 15px;
         pointer-events: none;
     }
+
+.image-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.image-upload {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.image-upload input[type="file"] {
+    width: 100%;
+    min-width: 0;
+    height: 42px;
+    box-sizing: border-box;
+    padding: 5.5px;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 17px;
+    background: black;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+.image-upload input[type="file"]:hover {
+    border-color: #3159b0;
+}
+
+.image-upload input[type="file"]::file-selector-button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 17px;
+    background: white;
+    color: black;
+    border: 0;
+    cursor: pointer;
+}
+
+.image-upload input[type="file"]::file-selector-button:hover {
+    background: #3159b0;
+    color: white;
+}
+
+.image-details {
+    display: grid;
+    grid-template-columns: 130px minmax(0, 1fr) 45px;
+    gap: 8px;
+    width: 100%;
+    align-items: start;
+}
+
+.image-preview {
+    display: block;
+    width: 130px !important;
+    height: 130px !important;
+    object-fit: cover;
+    border: 2px solid white;
+    box-sizing: border-box;
+}
+
+.image-preview.empty {
+    visibility: hidden;
+}
+
+.image-details > input[type="text"] {
+    width: 100%;
+    min-width: 0;
+    height: 42px;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 20px;
+    background: black;
+    color: white;
+    border: 2px solid white;
+    outline: none;
+}
+
+.image-details > input[type="text"]:focus {
+    border-color: #3159b0;
+}
+
+.image-details > input[type="text"]::placeholder {
+    color: #777;
+}
+
+.image-details > button {
+    width: 45px;
+    height: 42px;
+    padding: 0;
+    box-sizing: border-box;
+    background: black;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.image-details > button:hover {
+    background: #3159b0;
+    border-color: #3159b0;
+}
+
+@media (max-width: 600px) {
+    .image-upload {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .upload-status {
+        width: auto;
+        text-align: left;
+    }
+
+    .image-details {
+        grid-template-columns: 100px minmax(0, 1fr) 45px;
+    }
+
+    .image-preview {
+        width: 100px !important;
+        height: 100px !important;
+    }
+
+    .image-details > button {
+        width: 45px;
+    }
+}
 
     @media (max-width: 600px) {
         .frame {
@@ -248,64 +514,154 @@
             padding: 6px 9px;
             font-size: 17px;
         }
+
+        .dynamic-row {
+            flex-direction: column;
+        }
+
+        .dynamic-row button {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .admin-project {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .project-actions {
+            width: 100%;
+        }
+
+        .project-actions button {
+            flex: 1;
+        }
+
+        .image-row {
+            gap: 8px;
+        }
+
+        .image-upload {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .image-upload input[type="file"] {
+            width: 100%;
+        }
+
+        .image-details {
+            align-items: stretch;
+        }
+
+        .image-preview {
+            width: 100px;
+            height: 100px;
+        }
+
+        .image-details > input[type="text"] {
+            flex: 1;
+        }
+
+        .image-details > button {
+            width: 45px;
+        }
+
+        .upload-status {
+            text-align: left;
+        }
     }
 </style>
-
 
 </head>
 
 <body>
 
-    <div class="team top container">
-        <a href="/">
-            <img src="/images/home.png" width="200px">
-        </a>
+<div class="team top container">
+    <a href="/">
+        <img src="/images/home.png" width="200px" alt="Home">
+    </a>
+</div>
+
+<div class="container outline admin-container">
+    <img src="/images/frames/corner3.png" class="frame" alt="">
+
+<div class="admin-header">
+    <h1>Admin</h1>
+</div>
+
+<section class="current-song">
+    <div class="section-title">
+        <h2>Music</h2>
     </div>
 
-    <div class="container outline admin-container">
-        <img src="/images/frames/corner3.png" class="frame" alt="">
+    <div class="current-song-content">
+        <img id="current-image" src="" alt="Current album artwork">
 
-    <div class="admin-header">
-        <h1>Music</h1>
+        <div class="current-song-info">
+            <p id="current-artist">Artist</p>
+            <h2 id="current-title">Song</h2>
+            <p id="current-album">Album</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="section-title">
+        <h2>Select a song</h2>
     </div>
 
-    <section class="current-song">
-        <div class="section-title">
-            <h2>Currently Selected</h2>
+    <form id="search-form" class="search-form">
+        <input type="text" id="artist-input" placeholder="artist..." autocomplete="off">
+        <input type="text" id="song-input" placeholder="song..." autocomplete="off" required>
+        <button type="submit">SEARCH</button>
+    </form>
+
+    <p id="status"></p>
+    <div id="results"></div>
+</section>
+
+<section class="projects-admin">
+    <div class="section-title">
+        <h2>Projects</h2>
+    </div>
+
+    <form id="project-form" class="project-form">
+        <input type="text" id="project-title" placeholder="title..." required>
+        <input type="text" id="project-date" placeholder="date..." required>
+        <textarea id="project-description" placeholder="description..." required></textarea>
+
+        <div class="admin-subsection">
+            <h3>Links</h3>
+            <div id="project-links"></div>
+            <button type="button" class="add-row" id="add-link">+ ADD LINK</button>
         </div>
 
-        <div class="current-song-content">
-            <img id="current-image" src="" alt="Current album artwork">
-
-            <div class="current-song-info">
-                <p id="current-artist">Artist</p>
-                <h2 id="current-title">Song</h2>
-                <p id="current-album">Album</p>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="section-title">
-            <h2>Select a song</h2>
+        <div class="admin-subsection">
+            <h3>Images</h3>
+            <div id="project-images"></div>
+            <button type="button" class="add-row" id="add-image">+ ADD IMAGE</button>
         </div>
 
-        <form id="search-form" class="search-form">
-            <input type="text" id="artist-input" placeholder="artist..." autocomplete="off">
-            <input type="text" id="song-input" placeholder="song..." autocomplete="off" required>
-            <button type="submit">SEARCH</button>
-        </form>
+        <button type="submit">ADD PROJECT</button>
+    </form>
+
+    <p id="project-status"></p>
+
+    <div class="admin-subsection">
+        <h3>Existing Projects</h3>
+        <div id="project-list"></div>
+    </div>
+</section>
 
 
-        <p id="status"></p>
-        <div id="results"></div>
-    </section>
 </div>
 
 <p class="center copywrite">© 2026 Silas Unger</p>
 
-<script src="/admin/admin.js"></script>
+<script src="/admin/music.js"></script>
 
+<script src="/admin/projects.js"></script>
 
 </body>
 </html>
