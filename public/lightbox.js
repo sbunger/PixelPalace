@@ -78,3 +78,5 @@ document.addEventListener("keydown", (e) => {
         popup.classList.remove("shown");
     }
 });
+
+updateLightbox();
