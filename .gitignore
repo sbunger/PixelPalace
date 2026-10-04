@@ -63,4 +63,4 @@ temp/
 
 # Data
 data/*.json
-public/images/projects/
+public/images/projects/*
