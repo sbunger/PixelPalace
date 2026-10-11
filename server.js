@@ -1,3 +1,4 @@
+
 import express from "express";
 import dotenv from "dotenv";
 import fs from "fs/promises";
@@ -23,15 +24,6 @@ const PROJECT_IMAGES_DIR = path.join(
     "projects"
 );
 
-// --------------------------------------------------
-// Configuration
-// --------------------------------------------------
-
-const MUSICBRAINZ_URL = "https://musicbrainz.org/ws/2";
-
-const MUSICBRAINZ_USER_AGENT =
-    "SilasUngerWebsite/1.0 (https://sbunger.tech/)";
-
 const upload = multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
@@ -42,14 +34,11 @@ const upload = multer({
 
             const name = path
                 .basename(file.originalname, extension)
-                .replace(/[^a-zA-Z0-9-_]/g, "-")
+                .replace(/[^a-zA-Z0-9_-]/g, "-")
                 .replace(/-+/g, "-")
                 .toLowerCase();
 
-            cb(
-                null,
-                `${name}-${Date.now()}${extension}`
-            );
+            cb(null, `${name}-${Date.now()}${extension}`);
         }
     }),
     limits: {
@@ -66,40 +55,20 @@ const upload = multer({
         if (allowed.includes(file.mimetype)) {
             cb(null, true);
         } else {
-            cb(
-                new Error(
-                    "Only JPG, PNG, WebP, and GIF images are allowed."
-                )
-            );
+            cb(new Error("Only JPG, PNG, WebP, and GIF images are allowed."));
         }
     }
 });
 
-// --------------------------------------------------
-// Middleware
-// --------------------------------------------------
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use(
-    express.static(
-        path.join(__dirname, "public")
-    )
-);
-
-// --------------------------------------------------
 // Initialize data
-// --------------------------------------------------
 
 async function initializeData() {
-    await fs.mkdir(DATA_DIR, {
-        recursive: true
-    });
-
-    await fs.mkdir(PROJECT_IMAGES_DIR, {
-        recursive: true
-    });
+    await fs.mkdir(DATA_DIR, { recursive: true });
+    await fs.mkdir(PROJECT_IMAGES_DIR, { recursive: true });
 
     try {
         await fs.access(SONG_FILE);
@@ -121,24 +90,15 @@ async function initializeData() {
     try {
         await fs.access(PROJECTS_FILE);
     } catch {
-        await fs.writeFile(
-            PROJECTS_FILE,
-            "[]"
-        );
+        await fs.writeFile(PROJECTS_FILE, "[]");
     }
 }
 
-// --------------------------------------------------
 // Projects
-// --------------------------------------------------
 
 app.get("/api/projects", async (req, res) => {
     try {
-        const data = await fs.readFile(
-            PROJECTS_FILE,
-            "utf8"
-        );
-
+        const data = await fs.readFile(PROJECTS_FILE, "utf8");
         res.json(JSON.parse(data));
     } catch (error) {
         console.error(error);
@@ -151,13 +111,7 @@ app.get("/api/projects", async (req, res) => {
 
 app.post("/api/projects", async (req, res) => {
     try {
-        const {
-            title,
-            date,
-            description,
-            links,
-            images
-        } = req.body;
+        const { title, date, description, links, images } = req.body;
 
         if (!title || !date || !description) {
             return res.status(400).json({
@@ -165,11 +119,7 @@ app.post("/api/projects", async (req, res) => {
             });
         }
 
-        const data = await fs.readFile(
-            PROJECTS_FILE,
-            "utf8"
-        );
-
+        const data = await fs.readFile(PROJECTS_FILE, "utf8");
         const projects = JSON.parse(data);
 
         const project = {
@@ -214,50 +164,41 @@ app.post("/api/projects", async (req, res) => {
     }
 });
 
-app.delete(
-    "/api/projects/:index",
-    async (req, res) => {
-        try {
-            const index = Number(req.params.index);
+app.delete("/api/projects/:index", async (req, res) => {
+    try {
+        const index = Number(req.params.index);
+        const data = await fs.readFile(PROJECTS_FILE, "utf8");
+        const projects = JSON.parse(data);
 
-            const data = await fs.readFile(
-                PROJECTS_FILE,
-                "utf8"
-            );
-
-            const projects = JSON.parse(data);
-
-            if (
-                !Number.isInteger(index) ||
-                index < 0 ||
-                index >= projects.length
-            ) {
-                return res.status(404).json({
-                    error: "Project not found."
-                });
-            }
-
-            const deletedProject =
-                projects.splice(index, 1)[0];
-
-            await fs.writeFile(
-                PROJECTS_FILE,
-                JSON.stringify(projects, null, 4)
-            );
-
-            res.json({
-                success: true,
-                project: deletedProject
-            });
-        } catch (error) {
-            console.error(error);
-
-            res.status(500).json({
-                error: "Could not delete project."
+        if (
+            !Number.isInteger(index) ||
+            index < 0 ||
+            index >= projects.length
+        ) {
+            return res.status(404).json({
+                error: "Project not found."
             });
         }
+
+        const deletedProject = projects.splice(index, 1)[0];
+
+        await fs.writeFile(
+            PROJECTS_FILE,
+            JSON.stringify(projects, null, 4)
+        );
+
+        res.json({
+            success: true,
+            project: deletedProject
+        });
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            error: "Could not delete project."
+        });
     }
-);
+});
 
 app.post(
     "/api/projects/upload",
@@ -275,29 +216,19 @@ app.post(
                 path: `/images/projects/${req.file.filename}`
             });
         } catch (error) {
-            console.error(
-                "Image upload error:",
-                error
-            );
+            console.error("Image upload error:", error);
 
             res.status(500).json({
-                error: error.message ||
-                    "Could not upload image."
+                error: error.message || "Could not upload image."
             });
         }
     }
 );
 
-// --------------------------------------------------
-// Current song
-// --------------------------------------------------
+// Current song storage
 
 async function getCurrentSong() {
-    const data = await fs.readFile(
-        SONG_FILE,
-        "utf8"
-    );
-
+    const data = await fs.readFile(SONG_FILE, "utf8");
     return JSON.parse(data);
 }
 
@@ -308,25 +239,11 @@ async function setCurrentSong(song) {
     );
 }
 
-// --------------------------------------------------
-// Escape MusicBrainz/Lucene query
-// --------------------------------------------------
-
-function escapeLucene(value) {
-    return value.replace(
-        /([+\-!(){}\[\]^"~*?:\\/])/g,
-        "\\$1"
-    );
-}
-
-// --------------------------------------------------
-// GET current song
-// --------------------------------------------------
+// Get current song
 
 app.get("/api/song", async (req, res) => {
     try {
         const song = await getCurrentSong();
-
         res.json(song);
     } catch (error) {
         console.error(error);
@@ -337,225 +254,81 @@ app.get("/api/song", async (req, res) => {
     }
 });
 
-// --------------------------------------------------
-// Search MusicBrainz
-// --------------------------------------------------
+// Search iTunes
 
 app.get("/api/search", async (req, res) => {
     try {
-        const artist =
-            req.query.artist?.trim() || "";
-
-        const song =
-            req.query.song?.trim() || "";
+        const artist = (req.query.artist || "").trim();
+        const song = (req.query.song || "").trim();
 
         if (!artist && !song) {
             return res.status(400).json({
-                error:
-                    "Artist or song is required."
+                error: "Artist or song is required."
             });
         }
 
-        const queryParts = [];
-
-        if (artist) {
-            queryParts.push(
-                `artist:"${escapeLucene(artist)}"`
-            );
-        }
-
-        if (song) {
-            queryParts.push(
-                `recording:"${escapeLucene(song)}"`
-            );
-        }
-
-        const query =
-            queryParts.join(" AND ");
-
-        const url = new URL(
-            `${MUSICBRAINZ_URL}/recording`
-        );
-
-        url.searchParams.set(
-            "query",
-            query
-        );
-
-        url.searchParams.set(
-            "fmt",
-            "json"
-        );
-
-        url.searchParams.set(
-            "limit",
-            "20"
-        );
-
-        url.searchParams.set(
-            "inc",
-            "artist-credits+releases"
-        );
+        const params = new URLSearchParams({
+            term: [artist, song].filter(Boolean).join(" "),
+            media: "music",
+            entity: "song",
+            country: "US",
+            limit: "25"
+        });
 
         const response = await fetch(
-            url,
-            {
-                headers: {
-                    "User-Agent":
-                        MUSICBRAINZ_USER_AGENT,
-
-                    "Accept":
-                        "application/json"
-                }
-            }
+            `https://itunes.apple.com/search?${params.toString()}`
         );
 
         if (!response.ok) {
-            throw new Error(
-                `MusicBrainz returned ${response.status}`
-            );
+            throw new Error(`iTunes returned ${response.status}`);
         }
 
-        const data =
-            await response.json();
+        const data = await response.json();
 
-        const results = [];
+        const results = (data.results || []).map(track => ({
+            artist: track.artistName || "",
+            title: track.trackName || "",
+            album: track.collectionName || "",
+            image: track.artworkUrl100
+                ? track.artworkUrl100.replace(
+                    /\/\d+x\d+bb\./,
+                    "/600x600bb."
+                )
+                : "",
+            date: track.releaseDate
+                ? track.releaseDate.slice(0, 4)
+                : "",
+            url: track.trackViewUrl || ""
+        }));
 
-        for (
-            const recording of
-            data.recordings || []
-        ) {
-
-            const artists =
-                recording["artist-credit"] || [];
-
-            const artistName =
-                artists
-                    .map((credit) => {
-
-                        if (
-                            typeof credit === "string"
-                        ) {
-                            return credit;
-                        }
-
-                        return (
-                            credit.name ||
-                            credit.artist?.name ||
-                            ""
-                        );
-                    })
-                    .join("");
-
-            const releases =
-                recording.releases || [];
-
-            const release =
-                releases.find(
-                    (release) =>
-                        release[
-                            "release-group"
-                        ]?.[
-                            "primary-type"
-                        ] === "Album"
-                ) ||
-                releases[0];
-
-            if (!release) {
-                continue;
-            }
-
-            const releaseId =
-                release.id;
-
-            const image =
-                `https://coverartarchive.org/release/${releaseId}/front-500`;
-
-            results.push({
-                recordingId:
-                    recording.id,
-
-                releaseId,
-
-                title:
-                    recording.title,
-
-                artist:
-                    artistName,
-
-                album:
-                    release.title,
-
-                date:
-                    release.date || "",
-
-                image,
-
-                musicbrainzUrl:
-                    `https://musicbrainz.org/recording/${recording.id}`
-            });
-        }
-
-        res.json({
-            results
-        });
-
+        res.json({ results });
     } catch (error) {
-
-        console.error(
-            "MusicBrainz search error:",
-            error
-        );
+        console.error("iTunes search error:", error);
 
         res.status(500).json({
-            error:
-                "Could not search MusicBrainz."
+            error: "Could not search iTunes."
         });
     }
 });
 
-// --------------------------------------------------
 // Set current song
-// --------------------------------------------------
 
 app.post("/api/song", async (req, res) => {
     try {
+        const { artist, title, album, image, url } = req.body;
 
-        const {
-            artist,
-            title,
-            album,
-            image,
-            url
-        } = req.body;
-
-        if (
-            !artist ||
-            !title ||
-            !album ||
-            !image
-        ) {
+        if (!artist || !title || !album) {
             return res.status(400).json({
-                error:
-                    "Missing song information."
+                error: "Missing song information."
             });
         }
 
         const song = {
-            artist:
-                artist.trim(),
-
-            title:
-                title.trim(),
-
-            album:
-                album.trim(),
-
-            image:
-                image.trim(),
-
-            url:
-                url?.trim() || ""
+            artist: artist.trim(),
+            title: title.trim(),
+            album: album.trim(),
+            image: image?.trim() || "",
+            url: url?.trim() || ""
         };
 
         await setCurrentSong(song);
@@ -564,63 +337,33 @@ app.post("/api/song", async (req, res) => {
             success: true,
             song
         });
-
     } catch (error) {
-
-        console.error(
-            "Could not save song:",
-            error
-        );
+        console.error("Could not save song:", error);
 
         res.status(500).json({
-            error:
-                "Could not save current song."
+            error: "Could not save current song."
         });
     }
 });
 
-// --------------------------------------------------
 // Admin page
-// --------------------------------------------------
 
 app.get("/admin", (req, res) => {
     res.sendFile(
-        path.join(
-            __dirname,
-            "public",
-            "admin",
-            "index.html"
-        )
+        path.join(__dirname, "public", "admin", "index.html")
     );
 });
 
-// --------------------------------------------------
 // Start server
-// --------------------------------------------------
 
 initializeData()
     .then(() => {
-
-        app.listen(
-            PORT,
-            () => {
-
-                console.log(
-                    `Server running at http://localhost:${PORT}`
-                );
-
-                console.log(
-                    `Admin page: http://localhost:${PORT}/admin/`
-                );
-            }
-        );
+        app.listen(PORT, () => {
+            console.log(`Server running at http://localhost:${PORT}`);
+            console.log(`Admin page: http://localhost:${PORT}/admin/`);
+        });
     })
-    .catch((error) => {
-
-        console.error(
-            "Failed to initialize server:",
-            error
-        );
-
+    .catch(error => {
+        console.error("Failed to initialize server:", error);
         process.exit(1);
     });
