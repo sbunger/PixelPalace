@@ -5,6 +5,7 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 import multer from "multer";
+import session from "express-session";
 
 dotenv.config();
 
@@ -62,9 +63,165 @@ const upload = multer({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.set("trust proxy", 1);
+
+if (
+    !process.env.ADMIN_USERNAME ||
+    !process.env.ADMIN_PASSWORD ||
+    !process.env.SESSION_SECRET
+) {
+    throw new Error(
+        "ADMIN_USERNAME, ADMIN_PASSWORD, and SESSION_SECRET must be set in .env"
+    );
+}
+
+app.use(session({
+    name: "admin.sid",
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        secure: "auto",
+        sameSite: "strict",
+        maxAge: 1000 * 60 * 60 * 8
+    }
+}));
+
+function requireAdmin(req, res, next) {
+    if (req.session?.authenticated) {
+        return next();
+    }
+
+    if (req.path.startsWith("/api/")) {
+        return res.status(401).json({
+            error: "Unauthorized"
+        });
+    }
+
+    return res.redirect("/admin/login");
+}
+
+app.get("/admin/login", (req, res) => {
+    if (req.session?.authenticated) {
+        return res.redirect("/admin/");
+    }
+
+    res.status(200).send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <title>Admin Login - Silas Unger</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .login-form { display: flex; flex-direction: column; gap: 12px; }
+        .login-form input, .login-form button { box-sizing: border-box; width: 100%; padding: 10px 12px; font: 22px "Jersey 10", sans-serif; }
+        .login-form input { background: black; color: white; border: 2px solid white; }
+        .login-form button { background: white; color: black; border: 2px solid white; cursor: pointer; }
+        .login-form button:hover { background: #3159b0; color: white; border-color: #3159b0; }
+        .login-error { color: #3159b0; }
+        .login-form input:focus-visible { outline: none; border-color: #3159b0; }
+    </style>
+</head>
+<body>
+<div class="team top container">
+    <a href="/">
+        <img src="/images/home.png" width="200px" alt="Home">
+    </a>
+</div>
+    <main class="container outline">
+        <h1>Admin Login</h1>
+        <form class="login-form" method="POST" action="/admin/login" autocomplete="off">
+            <input name="username" type="text" placeholder="Username" required>
+            <input name="password" type="password" placeholder="Password" required>
+            <button type="submit">LOG IN</button>
+        </form>
+    </main>
+</body>
+</html>`);
+});
+
+app.post("/admin/login", (req, res, next) => {
+    const { username, password } = req.body;
+
+    if (
+        typeof username !== "string" ||
+        typeof password !== "string" ||
+        username !== process.env.ADMIN_USERNAME ||
+        password !== process.env.ADMIN_PASSWORD
+    ) {
+        return res.status(401).send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Failed</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="team top container">
+    <a href="/">
+        <img src="/images/home.png" width="200px" alt="Home">
+    </a>
+</div>
+    <main class="container outline">
+        <h1>Login failed</h1>
+        <p>Incorrect username or password.</p>
+        <p><a href="/admin/login">Try again</a></p>
+    </main>
+</body>
+</html>`);
+    }
+
+    req.session.regenerate((error) => {
+        if (error) {
+            return next(error);
+        }
+
+        req.session.authenticated = true;
+
+        req.session.save((saveError) => {
+            if (saveError) {
+                return next(saveError);
+            }
+
+            res.redirect("/admin/");
+        });
+    });
+});
+
+app.post("/admin/logout", requireAdmin, (req, res, next) => {
+    req.session.destroy((error) => {
+        if (error) {
+            return next(error);
+        }
+
+        res.clearCookie("admin.sid", {
+            httpOnly: true,
+            sameSite: "strict",
+            secure: "auto"
+        });
+
+        res.redirect("/admin/login");
+    });
+});
+
+// Require login for the admin page and all files under /admin.
+app.use("/admin", (req, res, next) => {
+    if (req.session?.authenticated) {
+        return next();
+    }
+
+    return res.redirect("/admin/login");
+});
+
+// Serve public files after the admin access check.
 app.use(express.static(path.join(__dirname, "public")));
 
-// Initialize data
+// Initialize data.
 
 async function initializeData() {
     await fs.mkdir(DATA_DIR, { recursive: true });
@@ -94,7 +251,7 @@ async function initializeData() {
     }
 }
 
-// Projects
+// Projects.
 
 app.get("/api/projects", async (req, res) => {
     try {
@@ -109,7 +266,7 @@ app.get("/api/projects", async (req, res) => {
     }
 });
 
-app.post("/api/projects", async (req, res) => {
+app.post("/api/projects", requireAdmin, async (req, res) => {
     try {
         const { title, date, description, links, images } = req.body;
 
@@ -164,7 +321,7 @@ app.post("/api/projects", async (req, res) => {
     }
 });
 
-app.delete("/api/projects/:index", async (req, res) => {
+app.delete("/api/projects/:index", requireAdmin, async (req, res) => {
     try {
         const index = Number(req.params.index);
         const data = await fs.readFile(PROJECTS_FILE, "utf8");
@@ -202,6 +359,7 @@ app.delete("/api/projects/:index", async (req, res) => {
 
 app.post(
     "/api/projects/upload",
+    requireAdmin,
     upload.single("image"),
     async (req, res) => {
         try {
@@ -225,7 +383,7 @@ app.post(
     }
 );
 
-// Current song storage
+// Current song storage.
 
 async function getCurrentSong() {
     const data = await fs.readFile(SONG_FILE, "utf8");
@@ -239,7 +397,7 @@ async function setCurrentSong(song) {
     );
 }
 
-// Get current song
+// Get current song.
 
 app.get("/api/song", async (req, res) => {
     try {
@@ -254,7 +412,7 @@ app.get("/api/song", async (req, res) => {
     }
 });
 
-// Search iTunes
+// Search iTunes.
 
 app.get("/api/search", async (req, res) => {
     try {
@@ -311,9 +469,9 @@ app.get("/api/search", async (req, res) => {
     }
 });
 
-// Set current song
+// Set current song.
 
-app.post("/api/song", async (req, res) => {
+app.post("/api/song", requireAdmin, async (req, res) => {
     try {
         const { artist, title, album, image, url } = req.body;
 
@@ -346,7 +504,7 @@ app.post("/api/song", async (req, res) => {
     }
 });
 
-// Admin page
+// Admin page.
 
 app.get("/admin", (req, res) => {
     res.sendFile(
@@ -354,7 +512,7 @@ app.get("/admin", (req, res) => {
     );
 });
 
-// Start server
+// Start server.
 
 initializeData()
     .then(() => {
