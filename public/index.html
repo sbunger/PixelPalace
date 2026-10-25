@@ -30,6 +30,11 @@
 
             .top {
                 filter: drop-shadow(7px 7px 0 #000000) drop-shadow(0px 0px 50px #000000);
+                transition: all 0.2s;
+            }
+
+            .top:hover {
+                transform: scale(1.007);
             }
 
             .planets {
@@ -53,11 +58,11 @@
             }
 
             .left-planet-1 {
-                top: 350px; left: 9%;
+                top: 300px; left: 9%;
             }
 
             .left-planet-2 {
-                top: 730px; left: 9%;
+                top: 680px; left: 9%;
             }
 
             .left-planet-1 img {
@@ -65,7 +70,7 @@
             }
 
             .right-planet-1 {
-                top: 250px; right: 9%;
+                top: 200px; right: 9%;
             }
 
             .right-planet-2 img {
@@ -73,7 +78,7 @@
             }
 
             .right-planet-2 {
-                top: 630px; right: 9%;
+                top: 580px; right: 9%;
             }
 
 
@@ -94,7 +99,7 @@
             }
 
             .icon {
-                width: 32px;
+                width: 36px;
             }
 
             .icon:hover {
@@ -102,11 +107,31 @@
             }
 
             #iconcontainer {
-                margin-top: 0;
+                width: 100%;
+                margin-top: 30px;
                 display: flex;
-                align-items: left;
+                align-items: center;
+                justify-content: center;
 
                 gap: 12px;
+            }
+
+            #split-page {
+                display: flex;
+                gap: 30px;
+            }
+
+            #split-page > img {
+                width: 34%;
+                height: auto;
+                flex-shrink: 0;
+                object-fit: contain;
+            }
+
+            #half-cont {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
             }
 
 
@@ -162,20 +187,25 @@
                 transition: color 1s;
             }
 
-            .frame {
-                position: absolute;
-                width: 120px;
-                top: 15px;
-                right: 15px;
-            }
-
             @media only screen and (max-width: 600px) {
                 #cat1 {
                  display: none;
                 }
 
+                .top:hover {
+                    transform: scale(1.1);
+                }
+
                 #cat2 {
                  display: none;
+                }
+
+                .top {
+                    transform: scale(1.1);
+                }
+
+                .icon:hover {
+                    transform: scale(1);
                 }
 
                 .planet-wrap {
@@ -196,6 +226,14 @@
 
                 .planet-wrap:hover {
                     transform: scale(1);
+                }
+
+                .planet-wrap.disabled:hover {
+                    transform: scale(1);
+                }
+
+                #split-page > img {
+                    display: none;
                 }
             }
         </style>
@@ -218,27 +256,26 @@
         </div>
 
         <div class="container outline" style="position: relative;">
-            <img src="images/frames/corner3.png" class="frame">
+            <div id="split-page">
+            <div id="half-cont">
             <h1 style="margin-top: 0;">Hello,</h1>
             <p>I'm Silas, and this is my personal site. <span style="color: #3159b0">Click the blue planets to travel through across my site!</span></p>
 
             <h2>About Me</h2>
-            <p>I am 17 and I live in Seattle, Washington. I love music (my guitar and violin), art, coding, and the outdoors! I am also interested in botany and environmental sciences.</p>
+            <p>I am 17 years old and I live and go to school in Seattle, Washington. I like to spend my time playing music with friends (the guitar and violin), camping, and hiking.</p>
 
-
-            <div id="iconcontainer">
-                <a href="https://www.instagram.com/unger.silas/"><img src="/images/icons/instagram.png" class="icon"></a>
-                <a href="https://github.com/sbunger"><img src="images/icons/github.png" class="icon"></a>
+            </div>
+            <img src="/images/portrait.png" style="image-rendering: auto;">
             </div>
         </div>
 
         <div class="planet-grid">
-            <a href="/photos/" class="planet-wrap left-planet-1">
-                <img class="planets right-planet-1" src="/images/planets/earth.png">
-                <img class="planet-text" src="/images/planets/ear.png"">
-            </a>
             <a class="planet-wrap left-planet-2 disabled">
                 <img class="planets right-planet-2" src="/images/planets/jupiter.png">
+            </a>
+            <a href="/photos/" class="planet-wrap left-planet-1">
+                <img class="planets right-planet-1" src="/images/planets/earth.png">
+                <img class="planet-text" src="/images/planets/ear.png">
             </a>
         </div>
 
@@ -256,6 +293,13 @@
                 </div>
             </div>
             <img id="spotify-album">
+        </div>
+
+        <div id="iconcontainer">
+            <a href="https://www.instagram.com/unger.silas/"><img src="/images/icons/instagram.png" class="icon"></a>
+            
+            <a href="https://github.com/sbunger"><img src="images/icons/github.png" class="icon"></a>
+            <a href="mailto:silasburtonunger@gmail.com"><img src="images/icons/envelope.png" class="icon"></a>
         </div>
 
         <p class="center copywrite"></p>
