@@ -17,15 +17,12 @@
         <style>
             .planet-wrap {
                 width: 200px;
-                position: absolute;
+                position: fixed;
                 display: flex;
 
-                transition: all .05s;
-
-                transition: transform 0.15s;
-
+                translate: 0 var(--parallax-y, 0px);
                 z-index: 100;
-                filter: drop-shadow(7px 7px 0 #000000);
+                transition: scale .15s;
             }
 
             .top {
@@ -49,20 +46,20 @@
             }
 
             .planet-wrap:hover {
-                transform: scale(1.1);
+                scale: 1.1;
             }
 
 
             .planet-wrap.disabled:hover {
-                transform: scale(1.03);
+                scale: 1.03;
             }
 
             .left-planet-1 {
-                top: 300px; left: 9%;
+                top: 250px; left: 9%;
             }
 
             .left-planet-2 {
-                top: 680px; left: 9%;
+                bottom: 100px; left: 9%;
             }
 
             .left-planet-1 img {
@@ -70,7 +67,7 @@
             }
 
             .right-planet-1 {
-                top: 200px; right: 9%;
+                top: 150px; right: 9%;
             }
 
             .right-planet-2 img {
@@ -78,7 +75,7 @@
             }
 
             .right-planet-2 {
-                top: 580px; right: 9%;
+                bottom: 200px; right: 9%;
             }
 
 
